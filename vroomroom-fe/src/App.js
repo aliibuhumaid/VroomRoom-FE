@@ -8,6 +8,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {jwtDecode} from 'jwt-decode'
 import WishList from './components/home/WishList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Routes, Route, Link} from 'react-router-dom';
+import Axios  from 'axios';
+import CategoryList from './components/home/CategoryList';
 
 function App() {
    const [isAuth, setIsAuth] = useState(false);
@@ -110,5 +114,17 @@ function App() {
    )
  }
  
+
+
+
+function App() {
+  //  return <Home />;
+  
+   return (
+    <div>
+        <CategoryList></CategoryList>
+    </div>
+    )
+}
 
 export default App;
