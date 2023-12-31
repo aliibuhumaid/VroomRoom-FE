@@ -1,70 +1,59 @@
-import { useEffect, useState } from "react"
-import React from 'react'
-import Axios from 'axios'
-import Category from './Category'
+import { useEffect, useState } from "react";
+import React from 'react';
+import Axios from 'axios';
+import Category from './Category';
 import CategoryCreateForm from "./CategoryCreateForm";
 
 export default function CategoryList() {
-
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Call API
-    loadCategoryList()
-  }, [])
+    loadCategoryList();
+  }, []);
 
   const loadCategoryList = () => {
     Axios.get("category/index")
-    .then((response) => {
-      console.log(response)
-      setCategories(response.data.categories)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
+      .then((response) => {
+        setCategories(response.data.categories);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Failed to load categories.");
+      });
+  };
 
   const addCategory = (category) => {
     Axios.post("category/add", category)
-    .then( res => {
-      console.log("Category Added successfully!");
-      loadCategoryList();
-    })
-    .catch( err => {
-      console.log("Error adding Category!");
-      console.log(err);
-    })
-  }
-  
+      .then(() => {
+        loadCategoryList();
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Error adding Category.");
+      });
+  };
 
-//   const allcategories = categories.map((category, index) => (
-//     <tr key={index}>
-//       <Category {...category}/>
-//     </tr>
-//   ))
-  const allcategories = categories && categories.map((category, index) => (
+  const allcategories = categories.map((category, index) => (
     <tr key={index}>
-      <Category {...category}/>
+      <Category {...category} />
     </tr>
   ));
-
-  
 
   return (
     <div>
       <h1>Category List</h1>
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th>Image</th>
-            </tr>
-            {allcategories}
-          </tbody>
-        </table>
-      </div>
-      <CategoryCreateForm addCategory = {addCategory}></CategoryCreateForm>
-      </div>
-  )
+      {error && <p>Error: {error}</p>}
+      <table>
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Image</th>
+          </tr>
+          {allcategories}
+        </tbody>
+      </table>
+      <CategoryCreateForm addCategory={addCategory} />
+    </div>
+  );
 }
