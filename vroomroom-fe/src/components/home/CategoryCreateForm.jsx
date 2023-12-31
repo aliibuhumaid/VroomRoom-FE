@@ -6,7 +6,14 @@ export default function CategoryCreateForm(props) {
 
   const handleChange = (event) => {
     const attributeToChange = event.target.name;
-    const newValue = event.target.value;
+    let newValue;
+
+    // Check if the input is for file upload
+    if (attributeToChange === 'image' && event.target.files) {
+      newValue = event.target.files[0]; // Get the first file
+    } else {
+      newValue = event.target.value;
+    }
 
     const category = {...newCategory}
     category[attributeToChange] = newValue;
@@ -16,7 +23,14 @@ export default function CategoryCreateForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.addCategory(newCategory);
+
+    // Create a FormData object to send the file
+    const formData = new FormData();
+    Object.keys(newCategory).forEach(key => {
+      formData.append(key, newCategory[key]);
+    });
+
+    props.addCategory(formData); // Send formData instead of JSON
     event.target.reset();
   }
 
@@ -32,7 +46,7 @@ export default function CategoryCreateForm(props) {
 
         <div>
           <label>Image</label>
-          <input type='email' name='image' onChange={handleChange}></input>
+          <input type='file' name='image' onChange={handleChange}></input>
         </div>
 
         <div>
