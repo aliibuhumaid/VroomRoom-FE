@@ -1,7 +1,7 @@
 {
   "name": "vroomroom-fe",
   "version": "0.1.0",
-  "proxy": "http://localhost:1337",
+  "proxy": "http://localhost:3050",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

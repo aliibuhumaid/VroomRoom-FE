@@ -36,6 +36,10 @@ export default function Signup(props) {
                 <input type='email' name='emailAddress' onChange={handleChange}className='form-control'></input>
             </div>
             <div>
+                <label>Phone Number</label>
+                <input type='text' name='phoneNumber' onChange={handleChange}className='form-control'></input>
+            </div>
+            <div>
                 <label>password</label>
                 <input type='password' name='password' onChange={handleChange} className='form-control'></input>
             </div>
