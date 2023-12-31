@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from './components/home/Home';
-import Signup from './components/home/user/Signup';
-import Signin from './components/home/user/Signin';
+import Signup from './components/user/Signup';
+import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 import Axios from 'axios';
