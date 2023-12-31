@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 export default function CategoryCreateForm(props) {
-
   const [newCategory, setNewCategory] = useState({});
 
   const handleChange = (event) => {
@@ -15,14 +14,14 @@ export default function CategoryCreateForm(props) {
       newValue = event.target.value;
     }
 
-    const category = {...newCategory}
-    category[attributeToChange] = newValue;
-    console.log(category);
-    setNewCategory(category);
-  }
+    const updatedCategory = { ...newCategory, [attributeToChange]: newValue };
+    setNewCategory(updatedCategory);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    console.log("Submitting form"); // Debugging log
 
     // Create a FormData object to send the file
     const formData = new FormData();
@@ -31,28 +30,27 @@ export default function CategoryCreateForm(props) {
     });
 
     props.addCategory(formData); // Send formData instead of JSON
-    event.target.reset();
-  }
+
+    setNewCategory({}); // Reset the state
+    event.target.reset(); // Reset the form fields
+  };
 
   return (
     <div>
-      <h1> Create Category </h1>
-
+      <h1>Create Category</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
-          <input type='text' name='name' onChange={handleChange}></input>
+          <input type='text' name='name' onChange={handleChange} value={newCategory.name || ''}></input>
         </div>
-
         <div>
           <label>Image</label>
           <input type='file' name='image' onChange={handleChange}></input>
         </div>
-
         <div>
           <input type='submit' value="Add Category"></input>
         </div>
       </form>
     </div>
-  )
+  );
 }

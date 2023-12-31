@@ -15,17 +15,28 @@ export default function CategoryList() {
   const loadCategoryList = () => {
     Axios.get("category/index")
       .then((response) => {
-        setCategories(response.data.categories);
+        console.log("API Response:", response.data); // Debugging log
+
+        if (response.data && Array.isArray(response.data)) {
+          setCategories(response.data);
+        } else {
+          setError("Categories data is not in expected format or undefined");
+          setCategories([]);
+        }
       })
       .catch((err) => {
         console.error(err);
         setError("Failed to load categories.");
+        setCategories([]);
       });
   };
 
   const addCategory = (category) => {
+    console.log("Adding Category:", category); // Debugging log
+
     Axios.post("category/add", category)
       .then(() => {
+        console.log("Category Added. Reloading category list."); // Debugging log
         loadCategoryList();
       })
       .catch((err) => {
