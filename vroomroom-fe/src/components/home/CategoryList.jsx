@@ -37,11 +37,18 @@ export default function CategoryList() {
   }
   
 
-  const allcategories = categories.map((category, index) => (
+//   const allcategories = categories.map((category, index) => (
+//     <tr key={index}>
+//       <Category {...category}/>
+//     </tr>
+//   ))
+  const allcategories = categories && categories.map((category, index) => (
     <tr key={index}>
       <Category {...category}/>
     </tr>
-  ))
+  ));
+
+  
 
   return (
     <div>

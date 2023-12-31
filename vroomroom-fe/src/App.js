@@ -7,13 +7,13 @@ import Axios  from 'axios';
 import CategoryList from './components/home/CategoryList';
 
 function App() {
-   return <Home />;
+  //  return <Home />;
   
+   return (
     <div>
-      <Routes>
         <CategoryList></CategoryList>
-      </Routes>
     </div>
+    )
 }
 
 export default App;
