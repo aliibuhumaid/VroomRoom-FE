@@ -11,7 +11,7 @@ function App() {
   
     <div>
       <Routes>
-        <Route path="/" element={ isAuth ? <AuthorList></AuthorList> : <Signin login={loginHandler}></Signin>}></Route>
+        <CategoryList></CategoryList>
       </Routes>
     </div>
 }
