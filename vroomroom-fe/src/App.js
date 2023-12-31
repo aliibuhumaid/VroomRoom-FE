@@ -9,12 +9,9 @@ import WishList from './components/home/WishList';
 import CategoryList from './components/home/CategoryList';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 function App() {
    const [isAuth, setIsAuth] = useState(false);
    const [user, setUser] = useState({});
- 
    useEffect(() => {
   const user = getUser();
   console.log(user);
@@ -24,10 +21,9 @@ function App() {
   }else{
    localStorage.removeItem("token");
    setIsAuth(false);
-   setUser(null); 
+   setUser(null);
   }
  },[])
- 
    const registerHandle = (user) => {
      Axios.post("auth/signup", user)
      .then(res => {
@@ -37,37 +33,31 @@ function App() {
        console.log(err);
      })
    }
- 
    const loginHandle = (cred) => {
      Axios.post("auth/signin", cred)
      .then( res => {
        console.log(res.data.token);
        let token = res.data.token;
- 
-       if(token != null) 
+       if(token != null)
        {
          localStorage.setItem("token", token);
          const user = getUser();
          console.log(user);
          user ? setIsAuth(true) : setIsAuth(false)
          user ? setUser(user) : setUser(null)
- 
        }
      })
      .catch(err => {
        console.log(err);
      })
    }
- 
    const getUser =() => {
  const token = getToken();
- return token ? jwtDecode(token).user : null 
+ return token ? jwtDecode(token).user : null
    }
- 
    const getToken = () => {
      const token = localStorage.getItem("token");
      return token;
- 
    }
    const onLogoutHandle = (e) => {
      e.preventDefault();
@@ -75,19 +65,16 @@ function App() {
      setIsAuth(false);
      setUser(null);
    }
- 
-   return (    
-      
+   return (
      <div>
        <nav>
-         
-         {isAuth ? 
+         {isAuth ?
          (
            <div>
            <Link to="/">Home</Link> &nbsp;
            <Link to="/logout" onClick={onLogoutHandle}>Logout</Link>
          </div>
-         ) : 
+         ) :
          (
            <div>
            <Link to="/">Home</Link> &nbsp;
@@ -96,7 +83,6 @@ function App() {
          </div>
          )
        }
-         
        </nav>
        <div>
        <Routes>
@@ -104,7 +90,6 @@ function App() {
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
            {/* <Route path="/wishlist/show" element={ isAuth ? <WishList></WishList> : <Signin login={loginHandle}></Signin>}></Route> */}
-           
          </Routes>
        </div>
        <div>
@@ -114,18 +99,12 @@ function App() {
      </div>
    )
  }
- 
-
-
-
 // function App() {
 //   //  return <Home />;
-  
 //    return (
 //     <div>
 //         <CategoryList></CategoryList>
 //     </div>
 //     )
 // }
-
 export default App;
