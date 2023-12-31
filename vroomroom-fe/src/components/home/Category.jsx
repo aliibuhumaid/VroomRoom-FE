@@ -4,7 +4,6 @@ export default function Category(props) {
   return (
     <>
       <td>{props.name}</td>
-      <td>{props.post}</td>
       <td>{props.image}</td>
     </>
   )

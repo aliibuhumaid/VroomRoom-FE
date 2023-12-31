@@ -107,6 +107,9 @@ function App() {
            
          </Routes>
        </div>
+       <div>
+         <CategoryList></CategoryList>
+     </div>
        <footer></footer>
      </div>
    )
