@@ -3,12 +3,13 @@ import React from 'react'
 export default function Post(props) {
     return (
             <>
-            <li>Title: {props.title}</li>
-            <li>Description: {props.description}</li>
-            <li>Location {props.location}</li>
-            <li>Price {props.price}</li>
-            <li><img src={props.image} alt="carImage" /></li>
-            <li>Category: {props.category.name}</li>
+            <td>{props.title}</td>
+            <td>{props.description}</td>
+            <td>{props.location}</td>
+            <td>{props.price}</td>
+            <td><img src={props.image} alt="carImage" /></td>
+            <td>{props.category.name}</td>
+            <td><button onClick={() => props.editView(props._id)}>Edit</button></td>
             </>
     )
 }
