@@ -16,7 +16,7 @@ export default function CategoryList() {
   const loadCategoryList = () => {
     Axios.get("category/index")
     .then((response) => {
-      console.log(response)
+      // console.log(response)
       setCategories(response.data.categories)
     })
     .catch((err) => {

@@ -4,11 +4,14 @@ import {useState} from 'react';
 import Axios from 'axios';
 import PostCreate from './PostCreate';
 import PostEdit from './PostEdit';
+import PostDetail from './PostDetail'
 export default function PostList() {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
     const [currentPost, setCurrentPost] = useState({})
+    const [view, setView] = useState();
+    const [isView, setIsView] = useState(false);
     useEffect(() =>{
         loadPosts()
         loadCategories()
@@ -27,7 +30,7 @@ export default function PostList() {
     const loadCategories = () =>{
         Axios.get("category/index")
         .then(response =>{
-            console.log(response.data);
+            // console.log(response.data);
             setCategories(response.data);
         })
         .catch(err =>{
@@ -41,7 +44,7 @@ export default function PostList() {
             console.log('Loaded Post Information');
             let post = res.data.post;
             setIsEdit(true);
-            setCurrentPost([post]);
+            setCurrentPost(post);
         })
         .catch(err =>{
             console.log("Error loading author information");
@@ -59,10 +62,48 @@ export default function PostList() {
             console.log(err);
         })
     }
+
+const updatePost = (post) =>{
+    Axios.post("post/edit", post)
+    .then(res =>{
+        console.log("Post Updated successfully!!!")
+        loadPosts();
+    })
+    .catch(err =>{
+        console.log("Error updating Post")
+        console.log(err);
+    })
+}
+
+const deletePost = (id) =>{
+    Axios.get(`post/delete?id=${id}`)
+    .then(res =>{
+        console.log("Post Deleted")
+        loadPosts();
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+}
+
+const viewPost =(id) =>{
+    Axios.get(`post/detail?id=${id}`)
+    .then(res =>{
+        console.log(res);
+        setView(res);
+        setIsView(true);
+        loadPosts();
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+
+}
+
     const allPosts = posts.map((post, index) =>(
         // console.log('working');
         <tr key={index}>
-            <Post {...post} editView={editView} ></Post>
+            <Post {...post} editView={editView} deletePost={deletePost} viewPost={viewPost}></Post>
             <hr />
         </tr>
     ))
@@ -72,6 +113,7 @@ export default function PostList() {
             {cate.name}
         </option>
     ))
+    
 
 
     
@@ -80,19 +122,24 @@ export default function PostList() {
             <h2>PostList</h2>
             <tr>
                 <td>Title</td>
-                <td>Description</td>
-                <td>Location</td>
                 <td>Price</td>
                 <td>Image</td>
                 <td>Category</td>
                 <td>Edit</td>
+                <td>Delete</td>
+                <td>View</td>
             </tr>
             {allPosts}
             {(!isEdit) ? 
             <PostCreate addPost={addPost} categories={allCategories}></PostCreate>
             :
-            <PostEdit categories={allCategories}></PostEdit>
+            <PostEdit categories={categories} post={currentPost} updatePost={updatePost}></PostEdit>
             }
+            {/* {(!isView) ?
+            <div></div>
+            :
+            <PostDetail post={view.data.post}></PostDetail>
+            } */}
         </div>
     )
 }
