@@ -26,8 +26,8 @@ export default function Home(props) {
         </ul>
         <form className="d-flex">
           
-          <button  href="/signin" className="btn btn-outline-success" >Signin</button>
-          <button href="/signup"className="btn btn-outline-success" >SignUp</button>
+          <button  href="auth/signin" className="btn btn-outline-success" >Signin</button>
+          <button href="auth/signup"className="btn btn-outline-success" >SignUp</button>
 
           
         </form>
@@ -42,23 +42,21 @@ export default function Home(props) {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
-        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+        <ul className="navbar-nav me-auto mb-2 mb-md-0 ">
           <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="/">Home</a>
+            <a className="nav-link active h-100 d-flex align-items-center justify-content-center" aria-current="page" href="/">Home</a>
           </li>
           <li className="nav-item">
             <a className="nav-link active" href="/auth/categroy">Categroy</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link active" href="auth/wishlist" tabindex="-1" aria-disabled="true">WishList</a>
+            <a className="nav-link active " href="auth/wishlist" tabindex="-1" aria-disabled="true">WishList</a>
           </li>
         </ul>
         <form className="d-flex">
           
-          <button  href="" className="btn btn-outline-success" >Logout</button>
+          <button  href="/logout" className="btn btn-outline-success" >Logout</button>
 
-
-          
         </form>
       </div>
     </div>
