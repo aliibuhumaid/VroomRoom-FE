@@ -135,11 +135,11 @@ const viewPost =(id) =>{
             :
             <PostEdit categories={categories} post={currentPost} updatePost={updatePost}></PostEdit>
             }
-            {/* {(!isView) ?
+            {(!isView) ?
             <div></div>
             :
             <PostDetail post={view.data.post}></PostDetail>
-            } */}
+            }
         </div>
     )
 }
