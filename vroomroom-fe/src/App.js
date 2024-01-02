@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
    const [isAuth, setIsAuth] = useState(false);
    const [user, setUser] = useState({});
+   
+
    useEffect(() => {
   const user = getUser();
   console.log(user);
@@ -65,46 +67,46 @@ function App() {
      setIsAuth(false);
      setUser(null);
    }
+   
    return (
-     <div>
-       <nav>
-         {isAuth ?
-         (
-           <div>
-           <Link to="/">Home</Link> &nbsp;
-           <Link to="/logout" onClick={onLogoutHandle}>Logout</Link>
-         </div>
-         ) :
-         (
-           <div>
-           <Link to="/">Home</Link> &nbsp;
-           <Link to="/signup">Signup</Link> &nbsp;
-           <Link to="/signin">Signin</Link> &nbsp;
-         </div>
-         )
-       }
-       </nav>
-       <div>
-       <Routes>
-           <Route path="/" element={ isAuth ? <Home /> : <Signin login={loginHandle}></Signin>}></Route>
-           <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
-           <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           {/* <Route path="/wishlist/show" element={ isAuth ? <WishList></WishList> : <Signin login={loginHandle}></Signin>}></Route> */}
-         </Routes>
-       </div>
-       <div>
-         <CategoryList></CategoryList>
-     </div>
-       <footer></footer>
-     </div>
-   )
- }
-// function App() {
-//   //  return <Home />;
-//    return (
-//     <div>
-//         <CategoryList></CategoryList>
-//     </div>
-//     )
-// }
-export default App;
+    
+      <div>
+        <nav>
+          {isAuth ? (
+            <div>
+              <Link to="/">Home</Link> &nbsp;
+              <Link to="/logout" onClick={onLogoutHandle}>Logout</Link>
+            </div>
+          ) : (
+            <div>
+              <Link to="/">Home</Link> &nbsp;   
+            </div>
+          )}
+        </nav>
+        <div>
+          <Routes>
+            <Route
+              path="/"
+              element={ <Home isAuth={isAuth} />}
+            ></Route>
+            {!isAuth && (
+              <>
+                <Route
+                  path="/signup"
+                  element={<Signup register={registerHandle} />}
+                ></Route>
+                <Route
+                  path="/signin"
+                  element={<Signin login={loginHandle} />}
+                ></Route>
+              </>
+            )}
+            {/* if you want to add Other Routes */}
+          </Routes>
+        </div>
+        <footer></footer>
+      </div>
+    );
+  }
+  
+  export default App;

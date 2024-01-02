@@ -1,14 +1,41 @@
 import React from "react";
 
 
-
-class Home extends React.Component{
-    render() {
-        return (
-        <div>
+export default function Home(props) {
+  return (
+    <div>
                 
 <header>
-  <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  {!props.isAuth ? <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div className="container-fluid">
+      <a className="navbar-brand" href="/">VroomRoom</a>
+      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarCollapse">
+        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+          <li className="nav-item">
+            <a className="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link active" href="/auth/categroy">Categroy</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link active" href="auth/wishlist" tabindex="-1" aria-disabled="true">WishList</a>
+          </li>
+        </ul>
+        <form className="d-flex">
+          
+          <button  href="/signin" className="btn btn-outline-success" >Signin</button>
+          <button href="/signup"className="btn btn-outline-success" >SignUp</button>
+
+          
+        </form>
+      </div>
+    </div>
+  </nav>
+:
+<nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div className="container-fluid">
       <a className="navbar-brand" href="#">VroomRoom</a>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,23 +50,30 @@ class Home extends React.Component{
             <a className="nav-link active" href="/auth/categroy">Categroy</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link active" href="#" tabindex="-1" aria-disabled="true">WishList</a>
+            <a className="nav-link active" href="auth/wishlist" tabindex="-1" aria-disabled="true">WishList</a>
           </li>
         </ul>
         <form className="d-flex">
           
-          <button  href="auth/signin" className="btn btn-outline-success" >Signin</button>
-          <button href="auth/signup"className="btn btn-outline-success" >SignUp</button>
+          <button  href="" className="btn btn-outline-success" >Logout</button>
+
 
           
         </form>
       </div>
     </div>
   </nav>
-</header>
+}
+  </header>
 
 <main>
-
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+      <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+      <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+    </div>
+  </div>
   
 
 
@@ -47,32 +81,7 @@ class Home extends React.Component{
   <div className="container marketing">
 
 
-    <div className="row">
-      <div className="col-lg-4">
-        <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2>Heading</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-        <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <div className="col-lg-4">
-        <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2>Heading</h2>
-        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-        <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-      <div className="col-lg-4">
-        <svg className="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
-        <h2>Heading</h2>
-        <p>And lastly this, the third column of representative placeholder content.</p>
-        <p><a className="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div>
-    </div>
-
-
-
+    
     <hr className="featurette-divider" />
 
     <div className="row featurette">
@@ -127,10 +136,7 @@ class Home extends React.Component{
 </main>
 
         </div>
-
-        );
-    }
+  )
 }
 
 
-export default Home;
