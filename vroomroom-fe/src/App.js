@@ -68,16 +68,6 @@ function App() {
      setUser(null);
    }
    return (
-<<<<<<< HEAD
-    <div>
-        <CategoryList></CategoryList>
-        <PostList></PostList>
-    </div>
-    )
-}
-
-export default App;
-=======
      <div>
        <nav>
          {isAuth ?
@@ -106,6 +96,7 @@ export default App;
        </div>
        <div>
          <CategoryList></CategoryList>
+         <PostList></PostList>
      </div>
        <footer></footer>
      </div>
@@ -120,4 +111,3 @@ export default App;
 //     )
 // }
 export default App;
->>>>>>> main
