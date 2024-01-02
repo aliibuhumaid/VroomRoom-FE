@@ -9,6 +9,8 @@ import WishList from './components/home/WishList';
 import CategoryList from './components/home/CategoryList';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PostList from './components/Post/PostList';
+
 function App() {
    const [isAuth, setIsAuth] = useState(false);
    const [user, setUser] = useState({});
@@ -66,6 +68,16 @@ function App() {
      setUser(null);
    }
    return (
+<<<<<<< HEAD
+    <div>
+        <CategoryList></CategoryList>
+        <PostList></PostList>
+    </div>
+    )
+}
+
+export default App;
+=======
      <div>
        <nav>
          {isAuth ?
@@ -108,3 +120,4 @@ function App() {
 //     )
 // }
 export default App;
+>>>>>>> main
