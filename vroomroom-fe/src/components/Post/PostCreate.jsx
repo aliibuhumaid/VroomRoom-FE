@@ -77,7 +77,7 @@ export default function PostCreate(props) {
                     <div>
                         <label>Category:</label>
                         <select name="category" onChange={handleChange} required>
-                            <option>Selecet a Category</option>
+                            <option>Select a Category</option>
                             {props.categories}
                         </select>                    
                     </div>
