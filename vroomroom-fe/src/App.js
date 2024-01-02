@@ -6,7 +6,7 @@ import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 import Axios from 'axios';
 import WishList from './components/home/WishList';
-import CategoryList from './components/home/CategoryList';
+import CategoryList from './components/Category/CategoryList';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostList from './components/Post/PostList';
