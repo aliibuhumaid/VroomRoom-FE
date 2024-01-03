@@ -1,59 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react';
 
 export default function Wishlist(props) {
     const handleSubmit = (event, postId, wishId) => {
-        console.log(postId, wishId)
         event.preventDefault();
-        console.log("here")
         const deleteInfo = {
             postId,
             wishId
         };
         props.wishDelete(deleteInfo);
-    }
+    };
+
     return (
-        <>
-            {props.wishlist.map((wish, index) => (<div key={index}>
-                {wish.post.map(onePost => <ul key={onePost._id}>
-                    <li >{onePost.title}</li>
-                    <li >{onePost.price}</li>
-                    <li ><img src={onePost.image[0]} alt="carImage" /></li>
-                    <li >{onePost.category.name}</li>
-                    <form onSubmit={(e) => handleSubmit(e, onePost._id, wish._id)}>
-                        <li><button type='submit'>Delete</button></li>
-                    </form>
-                    <hr />
-                </ul>)}
-                <hr />
-            </div>))}
-            {/* props.wishlist[0].post.map(onePost => (
-            <ul key={onePost._id}>
-                 <li >{onePost.title}</li>
-                 <li >{onePost.price}</li>
-                 <li ><img src={onePost.image[0]} alt="carImage" /></li>
-                 <li >{onePost.category.name}</li>
-                 <form onSubmit={(e)=>handleSubmit(e,onePost._id,props.wishlist._id)}>
-                     <li><button type='submit'>Delete</button></li>
-                 </form>
-                 <hr />
-                 </ul>
-        ))} */}
-            {/* // post.map((onePost, index) => ( */}
-
-        </>
-    )
+        <div className="container mt-4">
+            <div className="row">
+                {props.wishlist.map((wish, index) => (
+                    wish.post.map(onePost => (
+                        <div key={onePost._id} className="col-md-4 mb-4">
+                            <div className="card">
+                                {/* Image adjusted to fit within the card */}
+                                <img src={onePost.image[0]} className="card-img-top" alt="carImage" style={{ height: '150px', objectFit: 'cover' }} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{onePost.title}</h5>
+                                    <p className="card-text"><strong>Price:</strong> {onePost.price}</p>
+                                    <p className="card-text"><strong>Category:</strong> {onePost.category.name}</p>
+                                    <form onSubmit={(e) => handleSubmit(e, onePost._id, wish._id)}>
+                                        <button type='submit' className="btn btn-danger btn-sm">Delete from Wishlist</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ))}
+            </div>
+        </div>
+    );
 }
-
-// {props.wishlist.map(post =>Array.isArray(post) &post.map(onePost=>
-//     <ul key={onePost._id}>
-//     <li >{onePost.title}</li>
-//     <li >{onePost.price}</li>
-//     <li ><img src={onePost.image[0]} alt="carImage" /></li>
-//     <li >{onePost.category.name}</li>
-//     <form onSubmit={(e)=>handleSubmit(e,onePost._id,props.wishlist._id)}>
-//         <li><button type='submit'>Delete</button></li>
-//     </form>
-//     <hr />
-//     </ul>
-
-// ))

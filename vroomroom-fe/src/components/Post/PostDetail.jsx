@@ -25,8 +25,8 @@ export default function PostDetail(props) {
             <h1>Post Detail</h1>
             {view && (
                 <div className="card mt-3">
-                    {/* Remove maxHeight and objectFit to display the image in its full size */}
-                    <img src={view.image[0]} className="card-img-top" alt="Post" />
+                    {/* Image styling adjusted to fit the card's width */}
+                    <img src={view.image[0]} className="card-img-top" alt="Post" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
 
                     <div className="card-body">
                         <h5 className="card-title">{view.title}</h5>
