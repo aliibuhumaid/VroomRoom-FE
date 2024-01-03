@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
-import React from 'react'
+import { Link } from 'react-router-dom';
+import React from 'react';
 
-export default function NavBar({isAuth, onLogoutHandle}) {
+export default function NavBar({ isAuth, onLogoutHandle }) {
   return (
         <div className='navEdit'>
           <header>
@@ -48,10 +48,11 @@ export default function NavBar({isAuth, onLogoutHandle}) {
 
 
                   </form>
-                </div>
-              </div>
-            </nav>
-          </header>
+
+            </div>
           </div>
-)
+        </nav>
+      </header>
+    </div>
+  );
 }
