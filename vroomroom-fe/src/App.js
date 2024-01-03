@@ -51,7 +51,9 @@ function App() {
       });
   };
 
-
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
 
   const getUser = () => {
     const token = getToken();
