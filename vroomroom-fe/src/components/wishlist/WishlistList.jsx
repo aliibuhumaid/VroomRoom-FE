@@ -47,7 +47,10 @@ export default function WishlistList(props) {
     // const allWishlists = <Wishlist postWish={postWish} wishlist={wishlists} wishDelete={wishDelete}></Wishlist>
         
         return (
-        <div>
+        <div><br /> <br />
+            <h1>
+                WhishlistPage
+            </h1>
         {/*
             <ul>
                 {allWishlists}

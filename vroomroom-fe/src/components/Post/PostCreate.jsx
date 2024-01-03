@@ -3,12 +3,16 @@ import { useState } from 'react'
 import {useEffect} from 'react';
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+
 
 
 export default function PostCreate(props) {
     const navigate = useNavigate();
     const [newPost, setNewPost] = useState({})
     const [categories, setCategories] = useState([]);
+    const {userId} = useParams();
+    console.log(userId)
 
     useEffect(() =>{
         loadCategories()
@@ -32,6 +36,7 @@ export default function PostCreate(props) {
     ))
     
     const addPost = (post) =>{
+        console.log(post)
         Axios.post("/post/add", post)
         .then(res =>{
             console.log("Post Added successfully!!!");
@@ -77,6 +82,7 @@ export default function PostCreate(props) {
         formData.append('location', newPost.location);
         formData.append('price', newPost.price);
         formData.append('category', newPost.category);
+        formData.append('user', userId)
         for (let i = 0; i < newPost.image.length; i++) {
             formData.append('image', newPost.image[i])
          }

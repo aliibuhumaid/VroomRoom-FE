@@ -21,7 +21,7 @@ function App() {
    const [user, setUser] = useState({});
    useEffect(() => {
   const user = getUser();
-  console.log(user);
+  // console.log(user);
   if(user){
    setIsAuth(true);
    setUser(user);
@@ -81,10 +81,10 @@ function App() {
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
            <Route path='category' element={<CategoryList/>}/>
-           <Route path='/post' element={<PostList/>}/>
-           <Route path='/post/add' element={<PostCreate/>}/>
+           <Route path='/post' element={<PostList key={user.id} userId={user}/>}/>
+           <Route path='/post/add/:userId' element={<PostCreate/>}/>
            <Route path='/post/edit/:id' element={<PostEdit/>}/>
-           <Route path='/post/detail/:id' element={<PostDetail/>}/>
+           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
          </Routes>
        </div>
      </div>

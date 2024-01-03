@@ -5,17 +5,19 @@ import Axios from 'axios';
 import PostCreate from './PostCreate';
 import PostEdit from './PostEdit';
 import PostDetail from './PostDetail'
-export default function PostList() {
+export default function PostList(props) {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
     const [currentPost, setCurrentPost] = useState({})
     const [view, setView] = useState();
     const [isView, setIsView] = useState(false);
+
     useEffect(() =>{
         loadPosts()
         loadCategories()
     }, [])
+
     const loadPosts = () =>{
         Axios.get("post/index")
         .then(response =>{
@@ -27,6 +29,7 @@ export default function PostList() {
             console.log(err);
         })
     }
+
     const loadCategories = () =>{
         Axios.get("category/index")
         .then(response =>{
@@ -37,6 +40,7 @@ export default function PostList() {
             console.log(err);
         })
     }
+
     const editView = (id) =>{
         Axios.get(`post/edit?id=${id}`)
         .then((res) =>{
@@ -51,6 +55,7 @@ export default function PostList() {
             console.log(err);
         })
     }
+
     const addPost = (post) =>{
         Axios.post("post/add", post)
         .then(res =>{
@@ -86,6 +91,22 @@ const deletePost = (id) =>{
     })
 }
 
+const addWish = (id) =>{
+    let body = {
+        "post": id,
+        "user": props.userId.id
+    }
+    console.log(body);
+    Axios.post(`wishlist/add`, body)
+    .then(res =>{
+        console.log("withlist added");
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+}
+
+
 const viewPost =(id) =>{
     Axios.get(`post/detail?id=${id}`)
     .then(res =>{
@@ -103,7 +124,7 @@ const viewPost =(id) =>{
     const allPosts = posts.map((post, index) =>(
         // console.log('working');
         <tr key={index}>
-            <Post {...post} editView={editView} deletePost={deletePost} viewPost={viewPost}></Post>
+            <Post {...post} editView={editView} deletePost={deletePost} viewPost={viewPost} addWish={addWish} userId={props.userId.id}></Post>
             <hr />
         </tr>
     ))
