@@ -102,7 +102,7 @@ function App() {
           <Route path='/post/detail/:id' element={<PostDetail />}/>
           <Route path='/category' element={<CategoryList />}/>
           <Route path='/category/add' element={<CategoryCreate />}/>
-          <Route path='/category/edit' element={<CategoryEdit />}/>
+          <Route path='/category/edit/:id' element={<CategoryEdit />}/>
           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user} />}/>
         </Routes>
       </div>
