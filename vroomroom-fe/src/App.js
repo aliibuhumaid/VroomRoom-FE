@@ -13,6 +13,7 @@ import NavBar from './components/home/NavBar';
 import PostList from './components/Post/PostList';
 import PostCreate from './components/Post/PostCreate';
 import PostEdit from './components/Post/PostEdit';
+import PostDetail from './components/Post/PostDetail';
 
 import CategoryList from './components/Category/CategoryList';
 import CategoryCreate from './components/Category/CategoryCreate';
@@ -84,6 +85,7 @@ function App() {
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
+
            <Route path='/post' element={<PostList/>}/>
            <Route path='/post/add' element={<PostCreate/>}/>
            <Route path='/post/edit/:id' element={<PostEdit/>}/>
