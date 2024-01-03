@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     usertype();
     const user = getUser();
-
+console.log("dddd")
     if (user && user.user) {
       setIsAuth(true);
       setUser(user.user);
@@ -80,8 +80,9 @@ function App() {
   };
 
   const usertype = () =>{
+    console.log(user)
     if (!user) return;
-    Axios.get(`/user/userType?id=${user}`)
+    Axios.get(`/user/userType?id=${user.id}`)
     .then((res) => {
       console.log(res.data);
       setUserType(res.data);
