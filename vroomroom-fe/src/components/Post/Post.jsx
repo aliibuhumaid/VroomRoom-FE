@@ -10,8 +10,8 @@ export default function Post(props) {
             <td>{props.category ? props.category.name : 'No Category'}</td>            {/* <td><button onClick={() => props.editView(props._id)}>Edit</button></td> */}
             <td><Link to={`/post/edit/${props._id}`}>Edit</Link></td>
             <td><button onClick={() => props.deletePost(props._id)}>Delete</button></td>
-            <td><button onClick={() => props.viewPost(props._id)}>View</button></td>
-            <td><Link to={`/post/detail/id=${props._id}`}>View</Link></td>
+            {/* <td><button onClick={() => props.viewPost(props._id)}>View</button></td> */}
+            <td><Link to={`/post/detail/${props._id}`}>View</Link></td>
             </>
             <Link to={'/post/add'}>Add</Link>
             </>

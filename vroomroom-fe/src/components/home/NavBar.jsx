@@ -21,7 +21,7 @@ class NavBar extends React.Component{
             <a className="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link active" href="/auth/categroy">Categroy</a>
+            <Link to="/category" className="nav-link active">Category</Link>
           </li>
           <li className="nav-item">
             <Link to="/post" className="nav-link active">Post</Link>
