@@ -29,7 +29,7 @@
 }
 
 .navEdit {
-  margin-bottom: 100px;
+  margin-bottom: 55px;
 }
 
 .editCard {
@@ -49,3 +49,14 @@
   }
 }
 
+.topG {
+  height: 400px;
+  max-width: 100%;
+}
+
+
+
+.backImg{
+  background-image: url("https://i.imgur.com/aVaNoDG.jpg");
+
+}
