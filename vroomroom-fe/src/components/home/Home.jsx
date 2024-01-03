@@ -1,4 +1,6 @@
 import React from "react";
+import PostList from "../Post/PostList";
+import CategoryList from "../Category/CategoryList";
 import {Routes, Route, Link} from 'react-router-dom';
 
 
@@ -17,11 +19,8 @@ export default function Home(props) {
       </div>
 
        <div>
-        <h1>Post</h1>
-        <h1>Post</h1>
-        <h1>Post</h1>
-        <h1>Post</h1>
-        <h1>Post</h1>
+        <CategoryList>
+        </CategoryList>
 
        </div>
 

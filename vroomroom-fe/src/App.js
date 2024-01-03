@@ -31,31 +31,52 @@ import MyPost from './components/user/MyPost';
 
 
 function App() {
-   const [isAuth, setIsAuth] = useState(false);
-   const [user, setUser] = useState({});
-   
+  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState({ id: null }); // Default user object with null id
 
-   useEffect(() => {
-  const user = getUser();
-  // console.log(user);
-  if(user){
-   setIsAuth(true);
-   setUser(user);
-  }else{
-   localStorage.removeItem("token");
-   setIsAuth(false);
-   setUser(null);
-  }
- },[])
-   const registerHandle = (user) => {
-     Axios.post("auth/signup", user)
-     .then(res => {
-       console.log(res);
-     })
-     .catch(err => {
-       console.log(err);
-     })
-   }
+  useEffect(() => {
+    const user = getUser();
+
+    if (user && user.user) {
+      setIsAuth(true);
+      setUser(user.user);
+    } else {
+      console.log("nulling user",user)
+      localStorage.removeItem("token");
+      setIsAuth(false);
+      setUser({ id: null }); // Set to default object
+    }
+  }, []);
+
+  const registerHandle = (user) => {
+    Axios.post("auth/signup", user)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
+
+  const getUser = () => {
+    const token = getToken();
+    if (token) {
+      try {
+        return jwtDecode(token);  // Decode token
+      } catch (error) {
+        console.error("Error decoding token: ", error);
+        return { id: null };
+      }
+    }
+    return { id: null };  // Return default object if token is not valid
+  };
+
+
+
    const loginHandle = (cred) => {
      Axios.post("auth/signin", cred)
      .then( res => {
@@ -73,14 +94,6 @@ function App() {
      .catch(err => {
        console.log(err);
      })
-   }
-   const getUser =() => {
- const token = getToken();
- return token ? jwtDecode(token).user : null
-   }
-   const getToken = () => {
-     const token = localStorage.getItem("token");
-     return token;
    }
    const onLogoutHandle = (e) => {
      e.preventDefault();

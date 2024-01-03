@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Category from './Category';
-import CategoryCreate from "./CategoryCreate";
 import { Link } from 'react-router-dom';
 
 export default function CategoryList() {
@@ -52,19 +51,19 @@ export default function CategoryList() {
     };
 
     const allCategories = categories.map((category, index) => (
-        <div key={index} class="d-flex align-items-center justify-content-center col">
+        <div key={index} className="d-flex align-items-center justify-content-center col mb-4">
             <Category {...category} deleteCategory={() => deleteCategory(category._id)} />
         </div>
     ));
 
     return (
-        <div>
-            <div className="d-flex justify-content-between align-items-center mb-3">
-                <h1>Category List</h1>
+        <div className="container mt-4">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h1 className="mb-0">Category List</h1>
                 <Link to={'/category/add'} className="btn btn-primary">Add Category</Link>
             </div>
-            {error && <p>Error: {error}</p>}
-            <div class="mx-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            {error && <p className="text-danger">{error}</p>}
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {allCategories}
             </div>
         </div>
