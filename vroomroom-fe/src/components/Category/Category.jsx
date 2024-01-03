@@ -1,16 +1,20 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Category(props) {
-  return (
-    <>
-      <td>{props.name}</td>
-      <td><img src={props.image} width="120" height="120"></img></td>
-      <td><Link to={`/category/edit/${props._id}`}>Edit</Link></td>
-      <td><button onClick={() => props.deleteCategory(props._id)}>Delete</button></td>
-      <td><button onClick={() => props.viewCategory(props._id)}>View</button></td>
-      <td><Link to={`/category/detail/id=${props._id}`}>View</Link></td>
-      <Link to={'/category/add'}>Add</Link>
-    </>
-  )
+    return (
+        <div class="d-flex align-items-center justify-content-center col">
+            <div className="card shadow-sm" style={{ width: '17rem' }}>
+                <img src={props.image} className="card-img-top" alt="categoryImage" width={100} height={250}/>
+                <div className="card-body">
+                    <h5 className="card-title">{props.name}</h5>
+                    <div class="d-flex flex-column align-items-start">
+                        <Link to={`/category/edit/${props._id}`}><button type="button" className="btn btn-outline-primary mb-2">Edit</button></Link>
+                        <button onClick={() => props.deleteCategory(props._id)} className="btn btn-outline-danger mb-2">Delete</button>
+                        <Link to={`/category/detail/id=${props._id}`}><button type="button" className="btn btn-outline-secondary">View</button></Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }

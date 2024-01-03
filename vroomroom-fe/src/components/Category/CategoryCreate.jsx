@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -48,18 +48,18 @@ export default function CategoryCreate() {
     };
 
     return (
-        <div>
+        <div className="container mt-4">
             <h1>Create Category</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
-                    <input type="text" name="name" onChange={handleChange} required/>
+            <form onSubmit={handleSubmit} className="mt-3">
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Name:</label>
+                    <input type="text" className="form-control" id="name" name="name" onChange={handleChange} required/>
                 </div>
-                <div>
-                    <label>Image:</label>
-                    <input type="file" name="image" onChange={handleChange} required/>
+                <div className="mb-3">
+                    <label htmlFor="image" className="form-label">Image:</label>
+                    <input type="file" className="form-control" id="image" name="image" onChange={handleChange} required/>
                 </div>
-                <button type="submit">Add Category</button>
+                <button type="submit" className="btn btn-primary">Add Category</button>
             </form>
         </div>
     );
