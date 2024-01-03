@@ -28,6 +28,8 @@ import MyPost from './components/user/MyPost';
 
 
 
+import CategoryPosts from './components/Category/CategoryPosts';
+
 
 
 function App() {
@@ -120,8 +122,8 @@ function App() {
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
            <Route path='/myPost' element={<MyPost/>}/>
            {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
+           <Route path='/category/posts/:categoryId' element={<CategoryPosts/>}/>
            {user && (<Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>)}
-           
          </Routes>
        </div>
      </div>

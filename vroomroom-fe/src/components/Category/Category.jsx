@@ -20,9 +20,9 @@ export default function Category(props) {
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <Link to={`/category/detail/id=${props._id}`}>
-                                <button type="button" className="btn btn-outline-secondary w-100">View</button>
-                            </Link>
+                        <Link to={`/category/posts/${props._id}`}>
+                            <button type="button" className="btn btn-outline-secondary w-100">View</button>
+                        </Link>
                         </div>
                     </div>
                 </div>
