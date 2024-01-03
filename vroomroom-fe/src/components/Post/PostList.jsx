@@ -141,7 +141,7 @@ const viewPost =(id) =>{
     
     return (
         <div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="mx-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {allPosts}
             </div>
             <Link to={`/post/add/${props.userId.id}`}>Add</Link>
