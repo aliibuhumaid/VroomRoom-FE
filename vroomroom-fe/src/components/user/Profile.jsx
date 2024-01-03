@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 
 export default function Profile(props) {
     const navigate = useNavigate();
     const [userProfile, setUserProfile] = useState({});
-    const {id} = useParams();
+    console.log(userProfile)
 
     useEffect(() =>{
         getUser();
@@ -17,7 +16,7 @@ export default function Profile(props) {
     const handleChange = (event) =>{
         const attributeToChange = event.target.name;
         const newValue = event.target.value;
-        const updatedProfile = userProfile;
+        const updatedProfile = {...userProfile};
         if(attributeToChange == "image"){
             console.log(newValue);
             const file = event.target.files;
@@ -27,8 +26,8 @@ export default function Profile(props) {
             for(let i=0; i<file.length; i++){
                 allImages.push(file[i]);
             }
-            console.log(allImages)
-            updatedProfile[attributeToChange] = allImages;
+            console.log(allImages[0])
+            updatedProfile[attributeToChange] = allImages[0];
             setUserProfile(updatedProfile)
         }
         else{
@@ -45,10 +44,12 @@ export default function Profile(props) {
         formData.append('firstName', userProfile.firstName);
         formData.append('lastName', userProfile.lastName);
         formData.append('emailAddress', userProfile.emailAddress);
-        formData.append('price', userProfile.phoneNumber);
-        formData.append('category', userProfile.password);
+        formData.append('phoneNumber', userProfile.phoneNumber);
+        formData.append('password', userProfile.password);
+        formData.append('image', userProfile.image);
+
         console.log(formData);
-        console.log(userProfile);
+        console.log(userProfile.image[0]);
         updateProfile(formData);
 
     } 
@@ -70,7 +71,7 @@ export default function Profile(props) {
         Axios.get(`/user/profile?id=${props.userId.id}`)
         .then(response =>{
             console.log(response.data);
-            setUserProfile(response.data);
+            setUserProfile(response.data.user);
         })
         .catch(err =>{
             console.log(err);
@@ -101,9 +102,14 @@ export default function Profile(props) {
                         <input type="text" name="password" onChange={handleChange}/>
                     </div>
                     <div>
+                        <label>Current Image:</label>
+                        <img src={userProfile.image} alt="profile image" width={100} height={100} />
+                    </div>
+                    <div>
                         <label>Image:</label>
                         <input type="file" onChange={handleChange} name="image"/>
                     </div>
+                    <button type="submit">Update</button>
             </form>
         </div>
 
