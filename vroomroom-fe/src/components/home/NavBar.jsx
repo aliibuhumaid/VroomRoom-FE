@@ -23,7 +23,7 @@ export default function NavBar({isAuth, onLogoutHandle}) {
                       <Link to="/post" className="nav-link active">Post</Link>
                     </li>
                     <li>
-                      <a className="nav-link active" href="#" tabindex="-1" aria-disabled="true">WishList</a>
+                      <Link to="/whishlist" className="nav-link active">Whishlist</Link>
                     </li>
                   </ul>
                   <form className="d-flex">
