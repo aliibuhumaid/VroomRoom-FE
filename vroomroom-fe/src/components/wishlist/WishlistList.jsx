@@ -49,7 +49,7 @@ export default function WishlistList(props) {
         return (
         <div><br /> <br />
             <h1>
-                WhishlistPage
+                <wishlist></wishlist>
             </h1>
         {/*
             <ul>

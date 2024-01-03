@@ -31,9 +31,10 @@ function App() {
 
   useEffect(() => {
     const user = getUser();
-    if (user && user.id) {
+
+    if (user && user.user) {
       setIsAuth(true);
-      setUser(user);
+      setUser(user.user);
     } else {
       console.log("nulling user",user)
       localStorage.removeItem("token");
