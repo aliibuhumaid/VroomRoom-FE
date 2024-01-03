@@ -1,46 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
 
 export default function PostDetail(props) {
     const [view, setView] = useState();
-    const {id} = useParams();
-    // console.log(id)
-    // console.log("I am here")
-    useEffect(() =>{
-        // console.log("dddddd")
-        viewPost(id);
-    },[])
+    const { id } = useParams();
 
-    const viewPost =(id) =>{
-        console.log(id);
+    useEffect(() => {
+        viewPost(id);
+    }, [id]);
+
+    const viewPost = (id) => {
         Axios.get(`/post/detail?id=${id}`)
-        .then(res =>{
-            console.log(res.data.post);
-            setView(res.data.post);
-        })
-        .catch(err =>{
-            console.log(err);
-        })
-    
-    }
+            .then(res => {
+                setView(res.data.post);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
     return (
-    <>
-        <div>
-        <h1>Post Detail</h1>
-                {view && (
-                    <>
-                        <p>{view.title}</p>
-                        <p>{view.description}</p>
-                        <p>{view.location}</p>
-                        <p>{view.price}</p>
-                        <img src={view.image} alt="Post Image" />
-                        <p>{view.category.name}</p>
-                    </>
-                )}
-            
+        <div className="container mt-4">
+            <h1>Post Detail</h1>
+            {view && (
+                <div className="card mt-3">
+                    {/* Image styling adjusted to fit the card's width */}
+                    <img src={view.image[0]} className="card-img-top" alt="Post" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+
+                    <div className="card-body">
+                        <h5 className="card-title">{view.title}</h5>
+                        <p className="card-text">{view.description}</p>
+                        <ul className="list-group list-group-flush">
+                            <li className="list-group-item"><strong>Location:</strong> {view.location}</li>
+                            <li className="list-group-item"><strong>Price:</strong> {view.price}</li>
+                            <li className="list-group-item"><strong>Category:</strong> {view.category.name}</li>
+                        </ul>
+                    </div>
+                </div>
+            )}
         </div>
-    </>
-    )
+    );
 }
