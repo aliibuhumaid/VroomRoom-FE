@@ -10,6 +10,9 @@ import CategoryList from './components/Category/CategoryList';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostList from './components/Post/PostList';
+import NavBar from './components/home/NavBar';
+import Footer from './components/home/Footer'
+
 
 function App() {
    const [isAuth, setIsAuth] = useState(false);
@@ -70,45 +73,22 @@ function App() {
      setUser(null);
    }
    
-   return (
     
+    return (
       <div>
-        <nav>
-          {isAuth ? (
-            <div>
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/logout" onClick={onLogoutHandle}>Logout</Link>
-            </div>
-          ) : (
-            <div>
-              <Link to="/">Home</Link> &nbsp;   
-            </div>
-          )}
-        </nav>
+       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle}></NavBar>
         <div>
-          <Routes>
-            <Route
-              path="/"
-              element={ <Home isAuth={isAuth} />}
-            ></Route>
-            {!isAuth && (
-              <>
-                <Route
-                  path="/signup"
-                  element={<Signup register={registerHandle} />}
-                ></Route>
-                <Route
-                  path="/signin"
-                  element={<Signin login={loginHandle} />}
-                ></Route>
-              </>
-            )}
-            {/* if you want to add Other Routes */}
+        <Routes>
+            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
+            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
+            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
+            <Route path='/post' element={<PostList></PostList>}/>
+            <Route path='/auth/category' element={<CategoryList></CategoryList>}></Route>
           </Routes>
         </div>
-        <footer></footer>
+        <Footer></Footer>
       </div>
-    );
-  }
+    )
+}
   
   export default App;
