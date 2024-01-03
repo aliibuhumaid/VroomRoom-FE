@@ -1,43 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure you have Bootstrap installed
 
 export default function Profile(props) {
     const navigate = useNavigate();
     const [userProfile, setUserProfile] = useState({});
-    console.log(userProfile)
 
-    useEffect(() =>{
+    useEffect(() => {
         getUser();
+    }, []);
 
-    },[])
-
-    const handleChange = (event) =>{
+    const handleChange = (event) => {
         const attributeToChange = event.target.name;
         const newValue = event.target.value;
-        const updatedProfile = {...userProfile};
-        if(attributeToChange == "image"){
-            console.log(newValue);
+        const updatedProfile = { ...userProfile };
+        if (attributeToChange === 'image') {
             const file = event.target.files;
-            console.log(file);
-            let allImages =[];
-            console.log(file[0])
-            for(let i=0; i<file.length; i++){
+            let allImages = [];
+            for (let i = 0; i < file.length; i++) {
                 allImages.push(file[i]);
             }
-            console.log(allImages[0])
             updatedProfile[attributeToChange] = allImages[0];
-            setUserProfile(updatedProfile)
-        }
-        else{
+        } else {
             updatedProfile[attributeToChange] = newValue;
-            console.log(updatedProfile);
-            setUserProfile(updatedProfile);
         }
-    }
+        setUserProfile(updatedProfile);
+    };
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData();
         formData.append('_id', userProfile._id);
@@ -47,72 +38,70 @@ export default function Profile(props) {
         formData.append('phoneNumber', userProfile.phoneNumber);
         formData.append('password', userProfile.password);
         formData.append('image', userProfile.image);
-
-        console.log(formData);
-        console.log(userProfile.image[0]);
         updateProfile(formData);
+    };
 
-    } 
-
-    const updateProfile = (profile) =>{
+    const updateProfile = (profile) => {
         Axios.post('/user/update', profile)
-        .then(res =>{
-            console.log("Post Updated successfully!!!")
-            navigate('/post')
-        })
-        .catch(err =>{
-            console.log("Error updating Post")
-            console.log(err);
-        })
-    }
+            .then(res => {
+                navigate('/post');
+            })
+            .catch(err => {
+                console.log('Error updating profile', err);
+            });
+    };
 
-    const getUser = () =>{
-        if(!props.userId.id) return
+    const getUser = () => {
+        if (!props.userId.id) return;
         Axios.get(`/user/profile?id=${props.userId.id}`)
-        .then(response =>{
-            console.log(response.data);
-            setUserProfile(response.data.user);
-        })
-        .catch(err =>{
-            console.log(err);
-        })
-    }
+            .then(response => {
+                setUserProfile(response.data.user);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
     return (
-        <div>
-            <h1>Profile</h1>
-            <form onSubmit={handleSubmit}>
-            <div>
-                        <label>Current Image:</label>
-                        <img src={userProfile.image} alt="profile image" width={100} height={100} />
-                    </div>
-                    <div>
-                        <label>First Name:</label>
-                        <input type="text" name="firstName" onChange={handleChange} value={userProfile.firstName} disabled/>
-                    </div>
-                    <div>
-                        <label>Last Name:</label>
-                        <input type="text" name="lastName" onChange={handleChange} value={userProfile.lastName} disabled/>
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <input type="text" name="emailAddress" onChange={handleChange} value={userProfile.emailAddress}/>
-                    </div>
-                    <div>
-                        <label>Phone:</label>
-                        <input type="text" name="phoneNumber" onChange={handleChange} value={userProfile.phoneNumber}/>
-                    </div>
-                    <div>
-                        <label>Password:</label>
-                        <input type="text" name="password" onChange={handleChange}/>
-                    </div>
-
-                    <div>
-                        <label>Image:</label>
-                        <input type="file" onChange={handleChange} name="image"/>
-                    </div>
-                    <button type="submit">Update</button>
-            </form>
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-body">
+                    <h1 className="card-title text-center mb-4">Profile</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="currentImage">Current Image:</label>
+                            <div className="text-center mb-3">
+                                <img src={userProfile.image || 'default_profile_image_path'} alt="profile" className="img-thumbnail" width="200" height="200" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="firstName">First Name:</label>
+                            <input type="text" className="form-control mb-3" name="firstName" onChange={handleChange} value={userProfile.firstName || ''} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="lastName">Last Name:</label>
+                            <input type="text" className="form-control mb-3" name="lastName" onChange={handleChange} value={userProfile.lastName || ''} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="emailAddress">Email:</label>
+                            <input type="email" className="form-control mb-3" name="emailAddress" onChange={handleChange} value={userProfile.emailAddress || ''} disabled />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="phoneNumber">Phone:</label>
+                            <input type="text" className="form-control mb-3" name="phoneNumber" onChange={handleChange} value={userProfile.phoneNumber || ''} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" className="form-control mb-3" name="password" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="image">Image:</label>
+                            <input type="file" className="form-control mb-3" name="image" onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-primary mt-3">Update</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-    )
+    );
 }
