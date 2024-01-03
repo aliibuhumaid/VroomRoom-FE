@@ -126,7 +126,6 @@ const viewPost =(id) =>{
         // console.log('working');
         <tr key={index}>
             <Post {...post} editView={editView} deletePost={deletePost} viewPost={viewPost} addWish={addWish} userId={props.userId.id}></Post>
-            <hr />
         </tr>
     ))
 
@@ -141,10 +140,15 @@ const viewPost =(id) =>{
     
     return (
         <div>
+            <div>
+            <div className='postHead d-flex justify-content-between align-items-center'>
+                <h1>All Posts</h1>
+                <Link to={`/post/add/${props.userId.id}`} className='btn btn-primary'>Add</Link>
+            </div>
+            </div>
             <div class="mx-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                 {allPosts}
             </div>
-            <Link to={`/post/add/${props.userId.id}`}>Add</Link>
 
         </div>
     )
