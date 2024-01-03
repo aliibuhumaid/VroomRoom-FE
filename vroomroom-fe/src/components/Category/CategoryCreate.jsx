@@ -1,56 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-export default function CategoryCreateForm(props) {
-  const [newCategory, setNewCategory] = useState({});
+export default function CategoryCreate() {
+    const navigate = useNavigate();
+    const [newCategory, setNewCategory] = useState({});
 
-  const handleChange = (event) => {
-    const attributeToChange = event.target.name;
-    let newValue;
+    const addCategory = (category) => {
+        Axios.post("/category/add", category)
+        .then(res => {
+            console.log("Category Added successfully!!!");
+            navigate('/category');
+        })
+        .catch(err => {
+            console.log("Error adding Category");
+            console.log(err);
+        });
+    };
 
-    // Check if the input is for file upload
-    if (attributeToChange === 'image' && event.target.files) {
-      newValue = event.target.files[0]; // Get the first file
-    } else {
-      newValue = event.target.value;
-    }
+    const handleChange = (event) => {
+        const attributeToChange = event.target.name;
+        let newValue = event.target.value;
 
-    const updatedCategory = { ...newCategory, [attributeToChange]: newValue };
-    setNewCategory(updatedCategory);
-  };
+        if(attributeToChange === "image"){
+            const file = event.target.files[0];
+            setNewCategory(prevState => ({
+                ...prevState,
+                [attributeToChange]: file
+            }));
+        } else {
+            setNewCategory(prevState => ({
+                ...prevState,
+                [attributeToChange]: newValue
+            }));
+        }
+    };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = new FormData();
 
-    console.log("Submitting form"); // Debugging log
+        Object.keys(newCategory).forEach(key => {
+            formData.append(key, newCategory[key]);
+        });
 
-    // Create a FormData object to send the file
-    const formData = new FormData();
-    Object.keys(newCategory).forEach(key => {
-      formData.append(key, newCategory[key]);
-    });
+        addCategory(formData);
+    };
 
-    props.addCategory(formData); // Send formData instead of JSON
-
-    setNewCategory({}); // Reset the state
-    event.target.reset(); // Reset the form fields
-  };
-
-  return (
-    <div>
-      <h1>Create Category</h1>
-      <form onSubmit={handleSubmit}>
+    return (
         <div>
-          <label>Name</label>
-          <input type='text' name='name' onChange={handleChange} value={newCategory.name || ''}></input>
+            <h1>Create Category</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Name:</label>
+                    <input type="text" name="name" onChange={handleChange} required/>
+                </div>
+                <div>
+                    <label>Image:</label>
+                    <input type="file" name="image" onChange={handleChange} required/>
+                </div>
+                <button type="submit">Add Category</button>
+            </form>
         </div>
-        <div>
-          <label>Image</label>
-          <input type='file' name='image' onChange={handleChange}></input>
-        </div>
-        <div>
-          <input type='submit' value="Add Category"></input>
-        </div>
-      </form>
-    </div>
-  );
+    );
 }
