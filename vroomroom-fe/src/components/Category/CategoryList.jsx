@@ -3,6 +3,9 @@ import React from 'react';
 import Axios from 'axios';
 import Category from './Category';
 import CategoryCreateForm from "./CategoryCreateForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
