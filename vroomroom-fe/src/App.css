@@ -28,6 +28,10 @@
   color: #61dafb;
 }
 
+.navEdit {
+  margin-bottom: 100px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

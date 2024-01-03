@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function NavBar({isAuth, onLogoutHandle}) {
   return (
-        <div>
+        <div className='navEdit'>
           <header>
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <div className="container-fluid">

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Post from './Post';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
 import PostCreate from './PostCreate';
 import PostEdit from './PostEdit';
@@ -140,17 +141,11 @@ const viewPost =(id) =>{
     
     return (
         <div>
-            <h2>PostList</h2>
-            <tr>
-                <td>Title</td>
-                <td>Price</td>
-                <td>Image</td>
-                <td>Category</td>
-                <td>Edit</td>
-                <td>Delete</td>
-                <td>View</td>
-            </tr>
-            {allPosts}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {allPosts}
+            </div>
+            <Link to={`/post/add/${props.userId.id}`}>Add</Link>
+
         </div>
     )
 }
