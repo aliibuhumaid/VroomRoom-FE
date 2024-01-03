@@ -23,6 +23,8 @@ import CategoryEdit from './components/Category/CategoryEdit';
 
 import WishlistList from './components/wishlist/WishlistList';
 
+import CategoryPosts from './components/Category/CategoryPosts';
+
 
 
 function App() {
@@ -114,6 +116,7 @@ function App() {
            <Route path='/category/add' element={<CategoryCreate/>}/>
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
            {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
+           <Route path='/category/posts/:categoryId' element={<CategoryPosts/>}/>
          </Routes>
        </div>
 
