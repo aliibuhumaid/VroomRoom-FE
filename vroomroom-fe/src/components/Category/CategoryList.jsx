@@ -64,7 +64,6 @@ export default function CategoryList() {
           {allcategories}
         </tbody>
       </table>
-      <CategoryCreateForm addCategory={addCategory} />
     </div>
   );
 }
