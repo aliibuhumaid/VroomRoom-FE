@@ -135,3 +135,12 @@
 .main-content {
   padding-bottom: 40px; /* Adjust as needed */
 }
+
+.topG{
+
+  height: 400px;
+}
+
+.backImg{
+  background-image: url(https://i.imgur.com/aVaNoDG.jpg);
+}
