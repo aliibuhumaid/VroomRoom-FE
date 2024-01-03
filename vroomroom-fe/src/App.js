@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import Home from './components/home/Home';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 import Axios from 'axios';
-import WishList from './components/home/WishList';
-import CategoryList from './components/Category/CategoryList';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PostList from './components/Post/PostList';
+
 import NavBar from './components/home/NavBar';
 import Footer from './components/home/Footer'
+
+import PostCreate from './components/Post/PostCreate';
+import PostEdit from './components/Post/PostEdit';
+import PostDetail from './components/Post/PostDetail';
+
+import CategoryList from './components/Category/CategoryList';
+import CategoryCreate from './components/Category/CategoryCreate';
+import CategoryEdit from './components/Category/CategoryEdit';
+
+import WishList from './components/home/WishList';
+import WishlistList from './components/wishlist/WishlistList';
+
+
 
 
 function App() {
@@ -73,22 +84,25 @@ function App() {
      setUser(null);
    }
    
-    
-    return (
-      <div>
-       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle}></NavBar>
-        <div>
-        <Routes>
-            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
-            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
-            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-            <Route path='/post' element={<PostList></PostList>}/>
-            <Route path='/auth/category' element={<CategoryList></CategoryList>}></Route>
-          </Routes>
-        </div>
-        <Footer></Footer>
-      </div>
-    )
-}
-  
-  export default App;
+   return (
+     <div>
+      <NavBar></NavBar>
+       <div>
+       <Routes>
+           <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
+           <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
+           <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
+
+           <Route path='/post' element={<PostList/>}/>
+           <Route path='/post/add' element={<PostCreate/>}/>
+           <Route path='/post/edit/:id' element={<PostEdit/>}/>
+
+           <Route path='/category' element={<CategoryList/>}/>
+           <Route path='/category/add' element={<CategoryCreate/>}/>
+           <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
+         </Routes>
+       </div>
+     </div>
+   )
+ }
+export default App;

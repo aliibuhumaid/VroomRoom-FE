@@ -130,16 +130,7 @@ const viewPost =(id) =>{
                 <td>View</td>
             </tr>
             {allPosts}
-            {(!isEdit) ? 
-            <PostCreate addPost={addPost} categories={allCategories}></PostCreate>
-            :
-            <PostEdit categories={categories} post={currentPost} updatePost={updatePost}></PostEdit>
-            }
-            {(!isView) ?
-            <div></div>
-            :
-            <PostDetail post={view.data.post}></PostDetail>
-            }
         </div>
     )
 }
+            // <PostDetail post={view.data.post}></PostDetail>
