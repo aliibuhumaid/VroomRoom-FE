@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Home from './components/home/Home';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 import Axios from 'axios';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import WishList from './components/home/WishList';
-import WishlistList from './components/wishlist/WishlistList';
+
 import NavBar from './components/home/NavBar';
-import PostList from './components/Post/PostList';
+import Footer from './components/home/Footer'
+
 import PostCreate from './components/Post/PostCreate';
 import PostEdit from './components/Post/PostEdit';
 import PostDetail from './components/Post/PostDetail';
@@ -19,11 +19,17 @@ import CategoryList from './components/Category/CategoryList';
 import CategoryCreate from './components/Category/CategoryCreate';
 import CategoryEdit from './components/Category/CategoryEdit';
 
+import WishList from './components/home/WishList';
+import WishlistList from './components/wishlist/WishlistList';
+
+
 
 
 function App() {
    const [isAuth, setIsAuth] = useState(false);
    const [user, setUser] = useState({});
+   
+
    useEffect(() => {
   const user = getUser();
   console.log(user);
@@ -77,6 +83,7 @@ function App() {
      setIsAuth(false);
      setUser(null);
    }
+   
    return (
      <div>
       <NavBar></NavBar>
