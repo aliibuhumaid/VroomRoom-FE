@@ -76,36 +76,38 @@ export default function PostCreate(props) {
     return (
         <div className="container mt-4">
             <h1>Add Post</h1>
-            <form onSubmit={handleSubmit} className="mt-3">
-                <div className="mb-3">
-                    <label htmlFor="title" className="form-label">Title:</label>
-                    <input type="text" className="form-control" id="title" name="title" onChange={handleChange} required/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">Description:</label>
-                    <input type="text" className="form-control" id="description" name="description" onChange={handleChange} required/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="location" className="form-label">Location:</label>
-                    <input type="text" className="form-control" id="location" name="location" onChange={handleChange} required/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Price:</label>
-                    <input type="text" className="form-control" id="price" name="price" onChange={handleChange} required/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="image" className="form-label">Image:</label>
-                    <input type="file" className="form-control" id="image" name="image" onChange={handleChange} multiple required/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="category" className="form-label">Category:</label>
-                    <select className="form-select" id="category" name="category" onChange={handleChange} required>
-                        <option value="">Select a Category</option>
-                        {allCategories}
-                    </select>
-                </div>
-                <button type="submit" className="btn btn-primary">Add Post</button>
-            </form>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Title:</label>
+                        <input type="text" name="title" onChange={handleChange} required/>
+                    </div>
+                    <div>
+                        <label>Description:</label>
+                        <input type="text" name="description" onChange={handleChange} required/>
+                    </div>
+                    <div>
+                        <label>Location:</label>
+                        <input type="text" name="location" onChange={handleChange} required/>
+                    </div>
+                    <div>
+                        <label>Price:</label>
+                        <input type="text" name="price" onChange={handleChange} required/>
+                    </div>
+                    <div>
+                        <label>Image:</label>
+                        <input type="file" name="image" onChange={handleChange} multiple required/>
+                    </div>
+                    <div>
+                        <label>Category:</label>
+                        <select name="category" onChange={handleChange} required>
+                            <option>Select a Category</option>
+                            {allCategories}
+                        </select>                    
+                    </div>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
         </div>
     );
 }
