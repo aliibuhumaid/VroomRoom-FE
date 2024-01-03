@@ -11,6 +11,9 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PostList from './components/Post/PostList';
 import WishlistList from './components/wishlist/WishlistList';
+import NavBar from './components/home/NavBar';
+import PostCreate from './components/Post/PostCreate';
+import PostEdit from './components/Post/PostEdit';
 
 function App() {
    const [isAuth, setIsAuth] = useState(false);
@@ -70,50 +73,18 @@ function App() {
    }
    return (
      <div>
-       <nav>
-         {isAuth ?
-         (
-           <div>
-           <Link to="/">Home</Link> &nbsp;
-           <Link to="/logout" onClick={onLogoutHandle}>Logout</Link>
-         </div>
-         ) :
-         (
-           <div>
-           <Link to="/">Home</Link> &nbsp;
-           <Link to="/signup">Signup</Link> &nbsp;
-           <Link to="/signin">Signin</Link> &nbsp;
-         </div>
-         )
-       }
-       </nav>
+      <NavBar></NavBar>
        <div>
        <Routes>
-           <Route path="/" element={ isAuth ? <Home /> : <Signin login={loginHandle}></Signin>}></Route>
+           <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           {/* <Route path="/wishlist/show" element={ isAuth ? <WishList></WishList> : <Signin login={loginHandle}></Signin>}></Route> */}
+           <Route path='/post' element={<PostList/>}/>
+           <Route path='/post/add' element={<PostCreate/>}/>
+           <Route path='/post/edit/:id' element={<PostEdit/>}/>
          </Routes>
        </div>
-       <div>
-         {/* <CategoryList></CategoryList>
-         <PostList></PostList> */}
-     </div>
-     <div>
-      {console.log('user id in app ' + user.id)}
-      <WishlistList key={user.id} userId={user}></WishlistList>
-      </div>
-
-       <footer></footer>
      </div>
    )
  }
-// function App() {
-//   //  return <Home />;
-//    return (
-//     <div>
-//         <CategoryList></CategoryList>
-//     </div>
-//     )
-// }
 export default App;
