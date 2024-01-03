@@ -11,6 +11,7 @@ import Axios from 'axios';
 import NavBar from './components/home/NavBar';
 import Footer from './components/home/Footer'
 
+import PostList from './components/Post/PostList';
 import PostCreate from './components/Post/PostCreate';
 import PostEdit from './components/Post/PostEdit';
 import PostDetail from './components/Post/PostDetail';
