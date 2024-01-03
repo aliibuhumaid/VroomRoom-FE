@@ -4,8 +4,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
-import {Routes, Route} from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import { Routes, Route } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';  // Corrected import statement
 import Axios from 'axios';
 
 import NavBar from './components/home/NavBar';
@@ -20,22 +20,21 @@ import CategoryList from './components/Category/CategoryList';
 import CategoryCreate from './components/Category/CategoryCreate';
 import CategoryEdit from './components/Category/CategoryEdit';
 
-import WishList from './components/home/WishList';
 import WishlistList from './components/wishlist/WishlistList';
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ id: null }); // Default user object with null id
 
   useEffect(() => {
     const user = getUser();
-    if (user) {
+    if (user && user.id) {
       setIsAuth(true);
       setUser(user);
     } else {
       localStorage.removeItem("token");
       setIsAuth(false);
-      setUser(null);
+      setUser({ id: null }); // Set to default object
     }
   }, []);
 
@@ -67,41 +66,49 @@ function App() {
 
   const getUser = () => {
     const token = getToken();
-    return token ? jwtDecode(token) : null;
+    if (token) {
+      try {
+        return jwtDecode(token);  // Decode token
+      } catch (error) {
+        console.error("Error decoding token: ", error);
+        return { id: null };
+      }
+    }
+    return { id: null };  // Return default object if token is not valid
   };
 
   const getToken = () => {
     return localStorage.getItem("token");
   };
 
-   const onLogoutHandle = (e) => {
-     e.preventDefault();
-     localStorage.removeItem("token");
-     setIsAuth(false);
-     setUser(null);
-   }
-   
-   return (
-     <div>
-       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
-       <div>
-       <Routes>
-           <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
-           <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
-           <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           <Route path='/post' element={<PostList key={user.id} userId={user}/>}/>
-           <Route path='/post/add/:userId' element={<PostCreate/>}/>
-           <Route path='/post/edit/:id' element={<PostEdit/>}/>
-           <Route path='/post/detail/:id' element={<PostDetail/>}/>
-           <Route path='/category' element={<CategoryList/>}/>
-           <Route path='/category/add' element={<CategoryCreate/>}/>
-           <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
-           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
-         </Routes>
-       </div>
-         <Footer />
-     </div>
-   )
- }
+  const onLogoutHandle = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    setIsAuth(false);
+    setUser(null);
+  }
+
+  return (
+    <div>
+      <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+      <div>
+        <Routes>
+          <Route path="/" element={isAuth ? <Home /> : <Signin login={loginHandle} />}></Route>
+          <Route path='/signup' element={<Signup register={registerHandle} />}></Route>
+          <Route path='/signin' element={isAuth ? <Home /> : <Signin login={loginHandle} />}></Route>
+          <Route path='/post' element={<PostList key={user.id} userId={user} />}/>
+          <Route path='/post/add/:userId' element={<PostCreate />}/>
+          <Route path='/post/edit/:id' element={<PostEdit />}/>
+          <Route path='/post/detail/:id' element={<PostDetail />}/>
+          <Route path='/category' element={<CategoryList />}/>
+          <Route path='/category/add' element={<CategoryCreate />}/>
+          <Route path='/category/edit' element={<CategoryEdit />}/>
+          <Route path='/whishlist' element={<WishlistList key={user.id} userId={user} />}/>
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  );
+}
 
 export default App;
