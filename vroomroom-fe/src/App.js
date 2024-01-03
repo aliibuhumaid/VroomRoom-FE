@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Home from './components/home/Home';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
@@ -22,6 +23,7 @@ import CategoryEdit from './components/Category/CategoryEdit';
 
 import WishList from './components/home/WishList';
 import WishlistList from './components/wishlist/WishlistList';
+import Profile from './components/user/Profile';
 
 
 
@@ -102,6 +104,7 @@ function App() {
            <Route path='/category/add' element={<CategoryCreate/>}/>
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
            <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
+           <Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>
          </Routes>
        </div>
      </div>

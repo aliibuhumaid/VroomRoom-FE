@@ -31,7 +31,16 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                   <ul>
                     {isAuth ? (
                       <li>
-                        <Link onClick={onLogoutHandle} to="/">Logout</Link>
+                        {/* <Link onClick={onLogoutHandle} to="/">Logout</Link> */}
+                        <div className="dropdown">
+                          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown button
+                          </button>
+                          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                            <li><Link className="dropdown-item" onClick={onLogoutHandle} to="/">Logout</Link></li>
+                          </ul>
+                        </div>
                       </li>
                     ) : (
                       <>
