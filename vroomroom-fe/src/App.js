@@ -4,12 +4,13 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
-import {Routes, Route} from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import {Routes, Route, Link} from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode'
+
 import Axios from 'axios';
 
 import NavBar from './components/home/NavBar';
-import Footer from './components/home/Footer';
+import Footer from './components/home/Footer'
 
 import PostList from './components/Post/PostList';
 import PostCreate from './components/Post/PostCreate';
@@ -20,22 +21,25 @@ import CategoryList from './components/Category/CategoryList';
 import CategoryCreate from './components/Category/CategoryCreate';
 import CategoryEdit from './components/Category/CategoryEdit';
 
-import WishList from './components/home/WishList';
 import WishlistList from './components/wishlist/WishlistList';
+
+
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ id: null }); // Default user object with null id
 
   useEffect(() => {
     const user = getUser();
-    if (user) {
+
+    if (user && user.user) {
       setIsAuth(true);
-      setUser(user);
+      setUser(user.user);
     } else {
+      console.log("nulling user",user)
       localStorage.removeItem("token");
       setIsAuth(false);
-      setUser(null);
+      setUser({ id: null }); // Set to default object
     }
   }, []);
 
@@ -49,31 +53,42 @@ function App() {
       });
   };
 
-  const loginHandle = (cred) => {
-    Axios.post("auth/signin", cred)
-      .then(res => {
-        let token = res.data.token;
-        if (token) {
-          localStorage.setItem("token", token);
-          const user = getUser();
-          user ? setIsAuth(true) : setIsAuth(false);
-          user ? setUser(user) : setUser(null);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  const getUser = () => {
-    const token = getToken();
-    return token ? jwtDecode(token) : null;
-  };
-
   const getToken = () => {
     return localStorage.getItem("token");
   };
 
+  const getUser = () => {
+    const token = getToken();
+    if (token) {
+      try {
+        return jwtDecode(token);  // Decode token
+      } catch (error) {
+        console.error("Error decoding token: ", error);
+        return { id: null };
+      }
+    }
+    return { id: null };  // Return default object if token is not valid
+  };
+
+
+   const loginHandle = (cred) => {
+     Axios.post("auth/signin", cred)
+     .then( res => {
+       console.log(res.data.token);
+       let token = res.data.token;
+       if(token != null)
+       {
+         localStorage.setItem("token", token);
+         const user = getUser();
+         console.log(user);
+         user ? setIsAuth(true) : setIsAuth(false)
+         user ? setUser(user) : setUser(null)
+       }
+     })
+     .catch(err => {
+       console.log(err);
+     })
+   }
    const onLogoutHandle = (e) => {
      e.preventDefault();
      localStorage.removeItem("token");
@@ -83,7 +98,9 @@ function App() {
    
    return (
      <div>
-       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+      {/* <NavBar></NavBar> */}
+      <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+
        <div>
        <Routes>
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
@@ -99,9 +116,11 @@ function App() {
            <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
          </Routes>
        </div>
-         <Footer />
+
+      <Footer />
      </div>
    )
  }
 
 export default App;
+
