@@ -74,32 +74,34 @@ function App() {
     return localStorage.getItem("token");
   };
 
-  const onLogoutHandle = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-    setUser(null);
-  };
-
-  return (
-    <div>
-      <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
-      <div>
-        <Routes>
-          <Route path="/" element={isAuth ? <Home /> : <Signin login={loginHandle} />} />
-          <Route path='/signup' element={<Signup register={registerHandle} />} />
-          <Route path='/signin' element={isAuth ? <Home /> : <Signin login={loginHandle} />} />
-          <Route path='/post' element={<PostList />} />
-          <Route path='/post/add' element={<PostCreate />} />
-          <Route path='/post/edit/:id' element={<PostEdit />} />
-          <Route path='/category' element={<CategoryList />} />
-          <Route path='/category/add' element={<CategoryCreate />} />
-          <Route path='/category/edit/:id' element={<CategoryEdit />} />
-          {/* Add other routes as needed */}
-        </Routes>
-      </div>
-      <Footer />
-    </div>
-  );
-}
+   const onLogoutHandle = (e) => {
+     e.preventDefault();
+     localStorage.removeItem("token");
+     setIsAuth(false);
+     setUser(null);
+   }
+   
+   return (
+     <div>
+       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+       <div>
+       <Routes>
+           <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
+           <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
+           <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
+           <Route path='/post' element={<PostList key={user.id} userId={user}/>}/>
+           <Route path='/post/add/:userId' element={<PostCreate/>}/>
+           <Route path='/post/edit/:id' element={<PostEdit/>}/>
+           <Route path='/post/detail/:id' element={<PostDetail/>}/>
+           <Route path='/category' element={<CategoryList/>}/>
+           <Route path='/category/add' element={<CategoryCreate/>}/>
+           <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
+           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
+         </Routes>
+       </div>
+         <Footer />
+     </div>
+   )
+ }
 
 export default App;

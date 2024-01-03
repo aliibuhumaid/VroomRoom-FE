@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 export default function Post(props) {
+    console.log(props.userId);
     return (<>
             <>
             <td>{props.title}</td>
@@ -12,8 +13,9 @@ export default function Post(props) {
             <td><button onClick={() => props.deletePost(props._id)}>Delete</button></td>
             {/* <td><button onClick={() => props.viewPost(props._id)}>View</button></td> */}
             <td><Link to={`/post/detail/${props._id}`}>View</Link></td>
+            <td><button onClick={() => props.addWish(props._id)}>Add to Whishlist</button></td>
             </>
-            <Link to={'/post/add'}>Add</Link>
+            <Link to={`/post/add/${props.userId}`}>Add</Link>
             </>
     )
 }
