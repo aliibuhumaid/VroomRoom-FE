@@ -127,7 +127,7 @@ export default function PostCreate(props) {
                             {allCategories}
                         </select>                    
                     </div>
-                    <button type="submit">Add</button>
+                    <button type="submit" >Add</button>
                 </form>
             </div>
         </div>
