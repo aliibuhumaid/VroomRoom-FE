@@ -28,11 +28,11 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
               </ul>
               <div>
                 {isAuth ? (
-                  <Link to="/" onClick={onLogoutHandle} className="nav-link">Logout</Link>
+                  <button><Link to="/" onClick={onLogoutHandle} className="nav-link active">Logout</Link></button>
                 ) : (
                   <>
-                    <Link to="/signin" className="nav-link">Signin</Link>
-                    <Link to="/signup" className="nav-link">Signup</Link>
+                    <button><Link to="/signin" className="nav-link active">Signin</Link></button>
+                    <button><Link to="/signup" className="nav-link active">Signup</Link></button>
                   </>
                 )}
               </div>
