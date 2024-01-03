@@ -33,11 +33,11 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                       <li>
                         {/* <Link onClick={onLogoutHandle} to="/">Logout</Link> */}
                         <div className="dropdown">
-                          <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown button
-                          </button>
+                        <img src="http://res.cloudinary.com/dbk40zyi7/image/upload/v1704298449/ifneptovukziudhxiqic.jpg" className="rounded-circle btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" alt="logo" height="60"/>
+
                           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                            <li><Link className="dropdown-item" to="/myPost">My Posts</Link></li>
                             <li><Link className="dropdown-item" onClick={onLogoutHandle} to="/">Logout</Link></li>
                           </ul>
                         </div>

@@ -81,6 +81,10 @@ export default function Profile(props) {
         <div>
             <h1>Profile</h1>
             <form onSubmit={handleSubmit}>
+            <div>
+                        <label>Current Image:</label>
+                        <img src={userProfile.image} alt="profile image" width={100} height={100} />
+                    </div>
                     <div>
                         <label>First Name:</label>
                         <input type="text" name="firstName" onChange={handleChange} value={userProfile.firstName} disabled/>
@@ -101,10 +105,7 @@ export default function Profile(props) {
                         <label>Password:</label>
                         <input type="text" name="password" onChange={handleChange}/>
                     </div>
-                    <div>
-                        <label>Current Image:</label>
-                        <img src={userProfile.image} alt="profile image" width={100} height={100} />
-                    </div>
+
                     <div>
                         <label>Image:</label>
                         <input type="file" onChange={handleChange} name="image"/>

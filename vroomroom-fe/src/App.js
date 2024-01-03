@@ -24,6 +24,8 @@ import CategoryEdit from './components/Category/CategoryEdit';
 import WishList from './components/home/WishList';
 import WishlistList from './components/wishlist/WishlistList';
 import Profile from './components/user/Profile';
+import MyPost from './components/user/MyPost';
+
 
 
 
@@ -96,15 +98,17 @@ function App() {
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           <Route path='/post' element={<PostList key={user.id} userId={user}/>}/>
+           {user && (<Route path="/post" element={<PostList key={user.id} userId={user} />} /> )}
            <Route path='/post/add/:userId' element={<PostCreate/>}/>
            <Route path='/post/edit/:id' element={<PostEdit/>}/>
            <Route path='/post/detail/:id' element={<PostDetail/>}/>
            <Route path='/category' element={<CategoryList/>}/>
            <Route path='/category/add' element={<CategoryCreate/>}/>
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
-           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
-           <Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>
+           <Route path='/myPost' element={<MyPost/>}/>
+           {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
+           {user && (<Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>)}
+           
          </Routes>
        </div>
      </div>
