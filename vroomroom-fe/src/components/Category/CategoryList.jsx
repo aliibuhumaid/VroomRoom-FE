@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import React from 'react';
 import Axios from 'axios';
 import Category from './Category';
-import CategoryCreateForm from "./CategoryCreateForm";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import CategoryCreate from "./CategoryCreate";
 
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
@@ -67,7 +64,6 @@ export default function CategoryList() {
           {allcategories}
         </tbody>
       </table>
-      <CategoryCreateForm addCategory={addCategory} />
     </div>
   );
 }
