@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Home from './components/home/Home';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Signup from './components/user/Signup';
 import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
-
 import Axios from 'axios';
 
 import NavBar from './components/home/NavBar';
@@ -21,7 +21,14 @@ import CategoryList from './components/Category/CategoryList';
 import CategoryCreate from './components/Category/CategoryCreate';
 import CategoryEdit from './components/Category/CategoryEdit';
 
+import WishList from './components/home/WishList';
 import WishlistList from './components/wishlist/WishlistList';
+import Profile from './components/user/Profile';
+import MyPost from './components/user/MyPost';
+
+
+
+import CategoryPosts from './components/Category/CategoryPosts';
 
 
 
@@ -71,6 +78,7 @@ function App() {
   };
 
 
+
    const loginHandle = (cred) => {
      Axios.post("auth/signin", cred)
      .then( res => {
@@ -100,27 +108,26 @@ function App() {
      <div>
       {/* <NavBar></NavBar> */}
       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
-
        <div>
        <Routes>
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           <Route path='/post' element={<PostList key={user.id} userId={user}/>}/>
+           {user && (<Route path="/post" element={<PostList key={user.id} userId={user} />} /> )}
            <Route path='/post/add/:userId' element={<PostCreate/>}/>
            <Route path='/post/edit/:id' element={<PostEdit/>}/>
            <Route path='/post/detail/:id' element={<PostDetail/>}/>
            <Route path='/category' element={<CategoryList/>}/>
            <Route path='/category/add' element={<CategoryCreate/>}/>
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
-           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
+           <Route path='/myPost' element={<MyPost/>}/>
+           {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
+           <Route path='/category/posts/:categoryId' element={<CategoryPosts/>}/>
+           {user && (<Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>)}
          </Routes>
        </div>
-
-      <Footer />
      </div>
    )
  }
-
 export default App;
 

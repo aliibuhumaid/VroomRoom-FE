@@ -34,12 +34,16 @@
 
 .editCard {
   max-height: 400px;
+  margin-top: 50px;
 }
 
 .editCardBody{
   max-height: 200px
 }
 
+.postHead{
+  padding:0 50px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -59,4 +63,85 @@
 .backImg{
   background-image: url("https://i.imgur.com/aVaNoDG.jpg");
 
+}
+
+/* App.css */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: #505050;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.back-to-top-btn:hover {
+  background-color: #404040;
+  opacity: 1;
+}
+
+.back-to-top-btn.show {
+  opacity: 0.8;
+}
+
+.back-to-top-btn.show-transition {
+  transition: opacity 2s ease-in-out;
+}
+
+.back-to-top-btn::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 15px solid white; /* Creates the upward arrow */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Footer Styles */
+.footer-container {
+  position: fixed; /* Stick to the bottom */
+  bottom: 0; /* Position at the bottom */
+  left: 0; /* Stretch across the left */
+  right: 0; /* Stretch across the right */
+  background-color: #333; /* Dark background */
+  color: #f8f9fa; /* Whitish text */
+  padding: 5px; /* Minimal padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px; /* Fixed height */
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+/* Reset margins for the paragraph inside the footer */
+.footer-container p {
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Ensures no padding is affecting the layout */
+}
+
+/* Styles for the links inside the footer */
+.footer-container a {
+  color: #f8f9fa;
+  text-decoration: none;
+}
+
+.footer-container a:hover {
+  color: #ddd;
+  text-decoration: underline;
+}
+
+/* Adjusting Main Content */
+.main-content {
+  padding-bottom: 40px; /* Adjust as needed */
 }
