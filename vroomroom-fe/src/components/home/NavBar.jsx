@@ -25,19 +25,18 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                     <li>
                       <Link to="/whishlist" className="nav-link active">Whishlist</Link>
                     </li>
-                  </ul>
-                  <form className="d-flex">
-                  <nav>
-                  <ul>
-                    {isAuth ? (
+                 </ul>
+              <form className="d-flex">
+                <ul>
+                  {isAuth ? (
+                    <li>
+                      <Link onClick={onLogoutHandle} to="/">Logout</Link>
+                    </li>
+                  ) : (
+                    <>
                       <li>
-                        <Link onClick={onLogoutHandle} to="/">Logout</Link>
+                        <Link to="/signin">Signin</Link>
                       </li>
-                    ) : (
-                      <>
-                        <li>
-                          <Link to="/signin">Signin</Link>
-                        </li>
                         <li>
                           <Link to="/signup">Signup</Link>
                         </li>
