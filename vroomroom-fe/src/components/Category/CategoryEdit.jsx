@@ -1,4 +1,3 @@
-// CategoryEdit.jsx
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -60,34 +59,38 @@ export default function CategoryEdit() {
     };
 
     return (
-        <div>
+        <div className="container mt-4">
             <h1>Category Edit</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
+            <form onSubmit={handleSubmit} className="mt-3">
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Name:</label>
                     <input 
                         type="text" 
+                        className="form-control" 
+                        id="name" 
                         name="name" 
                         onChange={handleChange} 
                         value={category.name || ''}
                         required
                     />
                 </div>
-                <div>
-                    <label>Image:</label>
+                <div className="mb-3">
+                    <label htmlFor="image" className="form-label">Image:</label>
                     <input 
                         type="file" 
+                        className="form-control" 
+                        id="image" 
                         name="image" 
                         onChange={handleChange}
                     />
-                    {category.image && !category.image instanceof File && (
-                        <div>
+                    {category.image && !(category.image instanceof File) && (
+                        <div className="mt-2">
                             <p>Current Image:</p>
                             <img src={category.image} alt="Category" style={{ width: '100px', height: '100px' }}/>
                         </div>
                     )}
                 </div>
-                <button type="submit">Edit Category</button>
+                <button type="submit" className="btn btn-primary">Edit Category</button>
             </form>
         </div>
     );
