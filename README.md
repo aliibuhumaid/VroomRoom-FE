@@ -41,7 +41,7 @@ This repository contains the codebase for the Vehicle Listing App, including the
 ![VroomRoom-erd](https://github.com/SaraNedhal/artist-ecommerce/assets/100535445/0428faca-ea39-469b-84d1-072bcc7cba11)
 
 # Trello
-URL inveit
+https://trello.com/b/C6aY9odY
 
 # Home page of VroomRoom website:
 ![Screen Shot 2023-12-14 at 11 29 13 AM]()
