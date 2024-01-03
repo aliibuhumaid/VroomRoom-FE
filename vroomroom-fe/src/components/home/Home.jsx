@@ -2,6 +2,10 @@ import React from "react";
 import PostList from "../Post/PostList";
 import CategoryList from "../Category/CategoryList";
 import {Routes, Route, Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 
 
 
@@ -10,11 +14,11 @@ export default function Home(props) {
     <div>
                 
     <main>
-    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-          <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+    <div className="topG backImg">
+        <div className="col-md-6 px-0">
+          <h1 className="display-4 fst-italic text-white ">you can find many buyers in our platform</h1>
+          <p className="lead my-3 text-white">post an ad of your vehicle in our platform for free </p>
+          <Link to="/post/add/:userId" className="text-white fw-bold">Post Now</Link>
         </div>
       </div>
 
