@@ -96,6 +96,7 @@ function App() {
      <div>
       {/* <NavBar></NavBar> */}
       <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+
        <div>
        <Routes>
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
@@ -111,6 +112,7 @@ function App() {
            <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
          </Routes>
        </div>
+
       <Footer />
      </div>
    )
