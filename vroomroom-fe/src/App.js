@@ -14,6 +14,7 @@ import WishlistList from './components/wishlist/WishlistList';
 import NavBar from './components/home/NavBar';
 import PostCreate from './components/Post/PostCreate';
 import PostEdit from './components/Post/PostEdit';
+import PostDetail from './components/Post/PostDetail';
 
 function App() {
    const [isAuth, setIsAuth] = useState(false);
@@ -79,9 +80,11 @@ function App() {
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
+           <Route path='category' element={<CategoryList/>}/>
            <Route path='/post' element={<PostList/>}/>
            <Route path='/post/add' element={<PostCreate/>}/>
            <Route path='/post/edit/:id' element={<PostEdit/>}/>
+           <Route path='/post/detail/:id' element={<PostDetail/>}/>
          </Routes>
        </div>
      </div>

@@ -133,3 +133,4 @@ const viewPost =(id) =>{
         </div>
     )
 }
+            // <PostDetail post={view.data.post}></PostDetail>
