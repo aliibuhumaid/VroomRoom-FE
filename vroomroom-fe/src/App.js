@@ -35,6 +35,7 @@ function App() {
       setIsAuth(true);
       setUser(user);
     } else {
+      console.log("nulling user",user)
       localStorage.removeItem("token");
       setIsAuth(false);
       setUser({ id: null }); // Set to default object
