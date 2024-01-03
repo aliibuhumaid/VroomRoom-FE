@@ -118,9 +118,10 @@ function App() {
            <Route path='/category' element={<CategoryList/>}/>
            <Route path='/category/add' element={<CategoryCreate/>}/>
            <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
-           <Route path='/myPost' element={<MyPost/>}/>
            {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
            {user && (<Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>)}
+           {user && (<Route path='/myPost' element={<MyPost key={user.id} userId={user}/>}/>)}
+
            
          </Routes>
        </div>
