@@ -15,9 +15,8 @@ This repository contains the codebase for the Vehicle Listing App, including the
 
 # Technologies used:
 1. Frontend: React.js, HTML5, CSS3, JavaScript
-2. Backend: Node.js, Express.js, MongoDB
-3. Authentication: JSON Web Tokens (JWT), OAuth
-4. Database: MongoDB Atlas
+2. Authentication: JSON Web Tokens (JWT), OAuth
+
 
 # Wireframes:
    ## home page: 
@@ -38,16 +37,14 @@ This repository contains the codebase for the Vehicle Listing App, including the
    
 
 # ERD
-![VroomRoom-erd](https://github.com/SaraNedhal/artist-ecommerce/assets/100535445/0428faca-ea39-469b-84d1-072bcc7cba11)
+![VroomRoom-erd](https://i.imgur.com/jQZaQoW.png)
 
 # Trello
 https://trello.com/b/C6aY9odY
 
-# Home page of VroomRoom website:
-![Screen Shot 2023-12-14 at 11 29 13 AM]()
 
-# features of the app/platform 
-In version 1, the web application has 2 type of users:
+# features of the app/platform
+ the web application has 2 type of users:
 1. Buyer&seller
 2. Admin
 
@@ -56,13 +53,17 @@ In version 1, the web application has 2 type of users:
 -Upload, manage, and list their Vehicles for sale.
 -Add post to a personal wishlist.
 
-### User View:
-![Screen Shot 2023-12-14 at 11 29 35 AM](https://github.com/SaraNedhal/artist-ecommerce/assets/100535445/0bb6009c-7e6b-4252-861a-779488540a09)
-![Screen Shot 2023-12-14 at 11 30 02 AM](https://github.com/SaraNedhal/artist-ecommerce/assets/100535445/ee8ed876-5148-4068-b898-434dae929780)
+# Home page of VroomRoom website:
+![Screenshot home](https://i.imgur.com/2M0cFcC.png)
+
+### User View:opst page
+![Screen postList](https://i.imgur.com/qsg9Bta.png)
+![Screen WishList](https://i.imgur.com/UMkUpqH.png)
 
 
 ### wishlist Page:
-![Screen Shot 2023-12-14 at 12 04 08 PM](https://github.com/SaraNedhal/artist-ecommerce/assets/100535445/2bc634f3-eba6-46d6-9889-d1dcb99b48d4)
+![Screen WishList](https://i.imgur.com/UMkUpqH.png)
+
 
 
 
@@ -80,6 +81,13 @@ In version 1, the web application has 2 type of users:
 1. 
 2. 
 3. 
+
+# Future features
+1. 
+2. 
+3. 
+
+
 
 # Future features
 1. 
