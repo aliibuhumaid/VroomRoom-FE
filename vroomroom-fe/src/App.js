@@ -8,6 +8,7 @@ import Signin from './components/user/Signin';
 import {Routes, Route, Link} from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode'
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import NavBar from './components/home/NavBar';
 import Footer from './components/home/Footer'
@@ -33,12 +34,12 @@ import CategoryPosts from './components/Category/CategoryPosts';
 
 
 function App() {
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({ id: null });
   const [userType,setUserType] = useState();
 
   useEffect(() => {
-    usertype();
     const user = getUser();
 console.log("dddd")
     if (user && user.user) {
@@ -79,13 +80,12 @@ console.log("dddd")
     return { id: null };  // Return default object if token is not valid
   };
 
-  const usertype = () =>{
-    console.log(user)
-    if (!user) return;
-    Axios.get(`/user/userType?id=${user.id}`)
+  const usertype = async () =>{
+    // if (!isAuth) return;
+    await Axios.get(`/user/userType?id=${user.id}`)
     .then((res) => {
-      console.log(res.data);
-      setUserType(res.data);
+      console.log(res.data.user);
+      setUserType(res.data.user.type);
     })
     .catch((err) => {
       console.log(err);
@@ -117,31 +117,40 @@ console.log("dddd")
      localStorage.removeItem("token");
      setIsAuth(false);
      setUser(null);
+     navigate('/');
    }
-   
+   console.log(userType)
    return (
      <div>
       {/* <NavBar></NavBar> */}
-      <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} />
+      {isAuth ? <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle} userId={user.id} />
+      :
+      <NavBar isAuth={isAuth} onLogoutHandle={onLogoutHandle}/>
+}
        <div>
-       <Routes>
+        {isAuth && (
+        <Routes>
+           <Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>
+           <Route path='/myPost' element={<MyPost key={user.id} userId={user}/>}/>
+           <Route path='/post/add/:userId' element={<PostCreate/>}/>
+           <Route path='/post/edit/:id' element={<PostEdit/>}/>
+           <Route path='/category/add' element={<CategoryCreate/>}/>
+           <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
+           <Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>
+          </Routes>
+        )}
+          <Routes>
            <Route path="/" element={ isAuth ? <Home></Home>: <Signin login={loginHandle}></Signin>}></Route>
            <Route path='/signup' element={<Signup register={registerHandle}></Signup>}></Route>
            <Route path='/signin' element ={ isAuth ? <Home/> : <Signin login={loginHandle}></Signin>}></Route>
-           <Route path="/post" element={user ? <PostList key={user.id} userId={user} /> : <PostList />}/>           
-           <Route path='/post/add/:userId' element={<PostCreate/>}/>
-           <Route path='/post/edit/:id' element={<PostEdit/>}/>
+           <Route path="/post" element={user ? <PostList key={user.id} userId={user} isAuth={isAuth} /> : <PostList />}/>           
            <Route path='/post/detail/:id' element={<PostDetail/>}/>
-           <Route path='/category' element={<CategoryList/>}/>
-           <Route path='/category/add' element={<CategoryCreate/>}/>
-           <Route path='/category/edit/:id' element={<CategoryEdit/>}/>
-           {user && (<Route path='/whishlist' element={<WishlistList key={user.id} userId={user}/>}/>)}
+           <Route path='/category' element={user ? <CategoryList key={user.id} userId={user} isAuth={isAuth} /> :<CategoryList/>}/>
            <Route path='/category/posts/:categoryId' element={<CategoryPosts/>}/>
-           {user && (<Route path='/profile' element={<Profile key={user.id} userId={user}/>}/>)}
-           {user && (<Route path='/myPost' element={<MyPost key={user.id} userId={user}/>}/>)}
+          </Routes>
+
 
            
-         </Routes>
        </div>
      </div>
    )

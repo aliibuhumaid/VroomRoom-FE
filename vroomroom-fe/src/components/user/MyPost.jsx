@@ -45,7 +45,7 @@ export default function MyPost(props) {
                 <div className='editCardBody card-body'>
                   <div class='d-flex justify-content-between align-items-center'>
                     <h5 className='card-title'>{post.title}</h5>
-                    <button
+                    {/* <button
                       className={`btn btn-primary ${isAdded && 'btn-success'}`}
                       onClick={() => {
                         setIsAdded(true);
@@ -53,7 +53,7 @@ export default function MyPost(props) {
                       }}
                     >
                       Whishlist {isAdded && 'added'}
-                    </button>
+                    </button> */}
                   </div>
                   <div class='d-flex justify-content-between align-items-center'>
                     <p className='card-text'>

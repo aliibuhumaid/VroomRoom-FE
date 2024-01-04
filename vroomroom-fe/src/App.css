@@ -59,10 +59,12 @@
   max-width: 100%;
 }
 
-
+.signin {
+  margin-right: 5px;
+}
 
 .backImg{
-  background-image: url("https://i.imgur.com/aVaNoDG.jpg");
+  background-image: url("https://res.cloudinary.com/dbk40zyi7/image/upload/v1704311452/n9fuhcxzrxci3fuflfbh.jpg");
 
 }
 

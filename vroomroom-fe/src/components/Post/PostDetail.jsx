@@ -21,12 +21,13 @@ export default function PostDetail(props) {
     };
 
     return (
-        <div className="container mt-4">
+        <>
             <h1>Post Detail</h1>
+            <div className="container mt-4 d-flex justify-content-center">
             {view && (
-                <div className="card mt-3">
+                <div className="card mt-3" style={{ width: '50rem' }}>
                     {/* Image styling adjusted to fit the card's width */}
-                    <img src={view.image[0]} className="card-img-top" alt="Post" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+                    <img src={view.image[0]} className="card-img-top" alt="Post" style={{ width: '100%', height: 300, objectFit: 'cover' }} />
 
                     <div className="card-body">
                         <h5 className="card-title">{view.title}</h5>
@@ -40,5 +41,6 @@ export default function PostDetail(props) {
                 </div>
             )}
         </div>
+        </>
     );
 }
