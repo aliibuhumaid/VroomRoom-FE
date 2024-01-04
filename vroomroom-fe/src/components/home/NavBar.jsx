@@ -1,7 +1,30 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 
-export default function NavBar({ isAuth, onLogoutHandle }) {
+
+export default function NavBar({ isAuth, onLogoutHandle, userId }) {
+  console.log(userId)
+  const [userImage,setUserImage] = useState();
+console.log(userImage)
+  useEffect(() =>{
+      usertype()
+
+  }, [])
+  const usertype = async () =>{
+      // if (!isAuth) return;
+      await Axios.get(`/user/userType?id=${userId}`)
+      .then((res) => {
+        console.log(res.data.user);
+        setUserImage(res.data.user.image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  
+    }
+
+
   return (
         <div className='navEdit'>
           <header>
@@ -22,9 +45,11 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                     <li className="nav-item">
                       <Link to="/post" className="nav-link active">Post</Link>
                     </li>
+                    {isAuth &&                    
                     <li>
                       <Link to="/whishlist" className="nav-link active">Whishlist</Link>
                     </li>
+}
                   </ul>
                   <form className="d-flex">
                   <nav>
@@ -33,7 +58,8 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                       <li>
                         {/* <Link onClick={onLogoutHandle} to="/">Logout</Link> */}
                         <div className="dropdown">
-                        <img src="http://res.cloudinary.com/dbk40zyi7/image/upload/v1704298449/ifneptovukziudhxiqic.jpg" className="rounded-circle btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" alt="logo" height="60"/>
+                          {console.log(userImage)}
+                        <img src={userImage} className="rounded-circle btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" alt="logo" height="60"/>
 
                           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
@@ -44,12 +70,14 @@ export default function NavBar({ isAuth, onLogoutHandle }) {
                       </li>
                     ) : (
                       <>
+                      <ul className="navbar-nav me-auto mb-2 mb-md-0">
                         <li>
-                          <Link to="/signin">Signin</Link>
+                          <Link className='signin btn btn-primary' to="/signin">Signin</Link>
                         </li>
                         <li>
-                          <Link to="/signup">Signup</Link>
+                          <Link className='btn btn-primary' to="/signup">Signup</Link>
                         </li>
+                        </ul>
                       </>
                     )}
                   </ul>

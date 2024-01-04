@@ -10,11 +10,13 @@ export default function PostList(props) {
     const [posts, setPosts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
+    const [userType,setUserType] = useState();
     const [currentPost, setCurrentPost] = useState({})
     const [view, setView] = useState();
     const [isView, setIsView] = useState(false);
 
     useEffect(() =>{
+        usertype()
         loadPosts()
         loadCategories()
     }, [])
@@ -30,6 +32,20 @@ export default function PostList(props) {
             console.log(err);
         })
     }
+
+    const usertype = async () =>{
+        if (!props.isAuth) return;
+        await Axios.get(`/user/userType?id=${props.userId.id}`)
+        .then((res) => {
+          console.log(res.data.user);
+          setUserType(res.data.user.type);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    
+      }
+    
 
     const loadCategories = () =>{
         Axios.get("category/index")
@@ -125,7 +141,7 @@ const viewPost =(id) =>{
     const allPosts = posts.map((post, index) =>(
         // console.log('working');
         <tr key={index}>
-            <Post {...post} editView={editView} deletePost={deletePost} viewPost={viewPost} addWish={addWish} userId={props.userId.id}></Post>
+            <Post {...post} admin={userType} editView={editView} deletePost={deletePost} viewPost={viewPost} addWish={addWish}  userId={props.isAuth ? props.userId.id : undefined}></Post>
         </tr>
     ))
 
@@ -143,7 +159,7 @@ const viewPost =(id) =>{
             <div>
             <div className='postHead d-flex justify-content-between align-items-center'>
                 <h1>All Posts</h1>
-                <Link to={`/post/add/${props.userId.id}`} className='btn btn-primary'>Add</Link>
+                {props.isAuth && <Link to={`/post/add/${props.userId.id}`} className='btn btn-primary'>Add</Link>}
             </div>
             </div>
             <div class="mx-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">

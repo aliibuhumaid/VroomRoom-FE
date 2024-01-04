@@ -46,6 +46,7 @@ export default function MyPost(props) {
                 <div className='card-body'>
                   <div className='d-flex justify-content-between align-items-center'>
                     <h5 className='card-title'>{post.title}</h5>
+
                     <button
                       className={`btn btn-outline-primary ${isAdded && 'btn-success'}`}
                       onClick={() => {
@@ -53,8 +54,10 @@ export default function MyPost(props) {
                         post.addWish(post._id);
                       }}
                     >
+
                       Wishlist {isAdded && 'added'}
                     </button>
+
                   </div>
                   <div className='d-flex justify-content-between align-items-center'>
                     <p className='card-text'>

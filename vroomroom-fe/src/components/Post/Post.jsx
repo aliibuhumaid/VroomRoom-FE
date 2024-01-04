@@ -12,12 +12,18 @@ export default function Post(props) {
                     <h5 className="card-title">{props.title}</h5>
                     <p className="card-text"><b>Price: </b>{props.price}</p>
                     <p className="card-text"><b>Category: </b>{props.category ? props.category.name : 'No Category'}</p>
-                    <Link to={`/post/edit/${props._id}`} className="btn btn-outline-primary">Edit</Link>
-                    <button onClick={() => props.deletePost(props._id)} className="btn btn-outline-danger">Delete</button>
+                    {props.admin === "admin" && <>
+                        <Link to={`/post/edit/${props._id}`} className="btn btn-outline-primary">Edit</Link>
+                        <button onClick={() => props.deletePost(props._id)} className="btn btn-outline-danger">Delete</button>
+                        </>
+                    }
                     <Link to={`/post/detail/${props._id}`} className="btn btn-outline-secondary">View</Link>
+                    {props.userId &&
                     <button className={`btn ${isAdded ? 'btn-success' : 'btn-outline-primary'}`} onClick={() => {setIsAdded(true); props.addWish(props._id)}}>
+                    
                         Wishlist {isAdded && "Added"}
                     </button>
+                    }
                 </div>
             </div>
         </div>

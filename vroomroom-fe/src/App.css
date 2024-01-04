@@ -55,6 +55,22 @@
 }
 
 
+
+.topG {
+  height: 400px;
+  max-width: 100%;
+}
+
+.signin {
+  margin-right: 5px;
+}
+
+.backImg{
+  background-image: url("https://res.cloudinary.com/dbk40zyi7/image/upload/v1704311452/n9fuhcxzrxci3fuflfbh.jpg");
+
+}
+
+
 /* App.css */
 .back-to-top-btn {
   position: fixed;
@@ -136,11 +152,4 @@
   padding-bottom: 40px; /* Adjust as needed */
 }
 
-.topG{
 
-  height: 400px;
-}
-
-.backImg{
-  background-image: url(https://i.imgur.com/aVaNoDG.jpg);
-}
